@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07101d">
+<title>XT ETHUSDT Liquidity Map V1.4.1</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#060b12;color:#e8eef7;font:14px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}header{position:sticky;top:0;z-index:5;background:#08111d;border-bottom:1px solid #1c2a3a;padding:12px 14px}h1{font-size:17px;margin:0}.sub{font-size:11px;color:#8496aa;margin-top:3px}main{padding:10px;max-width:900px;margin:auto}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.card{background:#0b1420;border:1px solid #1b2a3b;border-radius:12px;padding:11px;margin-bottom:9px}.k{font-size:11px;color:#8294a8}.v{font-size:18px;font-weight:700;margin-top:3px}.status{display:flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:#f1b84b}.live{background:#4de18b}button{border:1px solid #2b4057;background:#101c2b;color:#eef5ff;padding:9px 11px;border-radius:8px;font-weight:600}button:active{transform:scale(.98)}select,input{width:100%;background:#0a1421;color:#fff;border:1px solid #2b4057;border-radius:7px;padding:8px}.row{display:flex;gap:7px;align-items:center}.row>*{flex:1}#book{display:grid;grid-template-columns:1fr 1fr;gap:6px}.side{padding:4px;border-radius:5px;background:#101b28}.bid{border-left:3px solid #3ed58a}.ask{border-left:3px solid #ef6378}#heatmap{height:360px;overflow:auto;background:#070d15;border-radius:9px;padding:5px}.level{display:grid;grid-template-columns:1fr 72px 1fr;gap:4px;align-items:center;margin:2px 0}.price{text-align:center;color:#cbd7e5;font-size:10px}.lb,.la{height:20px;border-radius:3px}.lb{background:linear-gradient(90deg,#163e2c,#0f2a20)}.la{background:linear-gradient(90deg,#351722,#551d2b)}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:6px;border-bottom:1px solid #172535;text-align:right}.good{color:#52e495}.bad{color:#ff7183}.muted{color:#7f91a5}.event{padding:6px 0;border-bottom:1px solid #172535;font-size:12px}.diag{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;white-space:pre-wrap;word-break:break-word;background:#070d15;border-radius:8px;padding:9px;color:#b8c7d9}footer{text-align:center;color:#62758b;font-size:10px;padding:15px}@media(min-width:720px){.grid{grid-template-columns:repeat(4,1fr)}.wide{grid-column:span 2}}
+</style>
+</head>
+<body>
+<header><div class="status"><span id="dot" class="dot"></span><div><h1>XT ETHUSDT Liquidity Map</h1><div class="sub">V1.4.1 • XT Futures / Research & Paper Trading</div></div></div><div id="status" class="sub">Starting XT depth monitor…</div></header>
+<main>
+<section class="card"><div class="grid"><div><div class="k">MID</div><div id="mid" class="v">—</div></div><div><div class="k">SPREAD</div><div id="spread" class="v">—</div></div><div><div class="k">IMBALANCE</div><div id="imb" class="v">—</div></div><div><div class="k">REGIME</div><div id="regime" class="v">—</div></div></div></section>
+<section class="card"><div class="row"><button id="refreshBtn">↻ Reconnect / Refresh</button><select id="levels"><option value="20">20 levels</option><option value="50" selected>50 levels</option></select></div></section>
+<section class="card wide"><h3>Connection Diagnostics</h3><div id="diag" class="diag">Initializing…</div></section>
+<section class="card wide"><h3>Liquidity Heatmap</h3><div id="heatmap">Waiting for XT depth…</div></section>
+<section class="card wide"><h3>Order Book</h3><div id="book">Waiting…</div></section>
+<section class="card wide"><h3>Liquidity Walls</h3><table><thead><tr><th>Price</th><th>Side</th><th>Notional</th><th>Strength</th></tr></thead><tbody id="walls"></tbody></table></section>
+<section class="card"><h3>Alerts</h3><div id="events" class="muted">No alerts yet.</div></section>
+<section class="card"><h3>Paper Trading</h3><div class="grid"><div><div class="k">Balance</div><div id="balance" class="v">1000.00</div></div><div><div class="k">PnL</div><div id="pnl" class="v">0.00</div></div><div><div class="k">Trades</div><div id="trades" class="v">0</div></div><div><div class="k">Position</div><div id="position" class="v">None</div></div></div><div class="row" style="margin-top:9px"><input id="qty" type="number" value="0.01" min="0.0001" step="0.01"><button id="longBtn">Paper Long</button><button id="shortBtn">Paper Short</button><button id="closeBtn">Close</button></div></section>
+<section class="card"><div class="muted">V1.4.1: new XT Liquidity Proxy, proxy-only primary connection, timeout/reconnect, diagnostics, safer parsing, and no real trading.</div></section>
+</main><footer>Real trading is disabled. Market monitoring and paper trading only.</footer>
+<script>
+'use strict';
+
+const XT_PROXY='https://xt-ethusdt-liquidity-proxy.ramin-ravangard64.workers.dev/';
+const SYMBOL='eth_usdt';
+
+const el={
+ dot:document.getElementById('dot'),status:document.getElementById('status'),
+ diag:document.getElementById('diag'),mid:document.getElementById('mid'),
+ spread:document.getElementById('spread'),imb:document.getElementById('imb'),
+ regime:document.getElementById('regime'),levels:document.getElementById('levels'),
+ heatmap:document.getElementById('heatmap'),book:document.getElementById('book'),
+ walls:document.getElementById('walls'),events:document.getElementById('events'),
+ balance:document.getElementById('balance'),pnl:document.getElementById('pnl'),
+ trades:document.getElementById('trades'),position:document.getElementById('position'),
+ qty:document.getElementById('qty')
+};
+
+let lastDepth=null,historyData=[],alertData=[],busy=false;
+const paperState={balance:1000,position:null,trades:[]};
+const n=x=>Number(x)||0;
+
+function setStatus(t,live=false){
+ el.status.textContent=t;
+ el.dot.classList.toggle('live',live);
+}
+function diag(t){el.diag.textContent=t}
+
+function norm(rows){
+ if(!Array.isArray(rows))return[];
+ return rows.map(x=>Array.isArray(x)
+ ?[n(x[0]),n(x[1])]
+ :[n(x?.price),n(x?.quantity??x?.qty??x?.amount)])
+ .filter(x=>x[0]>0&&x[1]>0);
+}
+
+function parseDepth(payload){
+ const root=payload?.result??payload?.data??payload;
+ const asks=norm(root?.a??root?.asks);
+ const bids=norm(root?.b??root?.bids);
+
+ if(!asks.length||!bids.length){
+  const rc=payload?.returnCode??payload?.code??payload?.error?.code??'n/a';
+  const msg=payload?.error?.msg??payload?.msg??payload?.message??'none';
+  throw new Error(`No usable order book • bids=${bids.length} asks=${asks.length} returnCode=${rc} msg=${msg}`);
+ }
+
+ return{asks,bids,ts:Number(root?.t)||Date.now()};
+}
+
+function analyze(book){
+ book.asks.sort((a,b)=>a[0]-b[0]);
+ book.bids.sort((a,b)=>b[0]-a[0]);
+
+ const bid=book.bids[0]?.[0],ask=book.asks[0]?.[0];
+ if(!bid||!ask)throw new Error('empty depth');
+
+ const mid=(bid+ask)/2;
+ const spread=ask-bid;
+ const nb=book.bids.slice(0,10).reduce((s,x)=>s+x[0]*x[1],0);
+ const na=book.asks.slice(0,10).reduce((s,x)=>s+x[0]*x[1],0);
+ const imbalance=(nb-na)/(nb+na||1);
+
+ const values=[...book.bids,...book.asks]
+ .map(x=>x[0]*x[1]).sort((a,b)=>a-b);
+ const med=values[Math.floor(values.length/2)]||1;
+
+ const walls=[
+  ...book.bids.map(x=>({price:x[0],qty:x[1],side:'bid'})),
+  ...book.asks.map(x=>({price:x[0],qty:x[1],side:'ask'}))
+ ].filter(x=>x.price*x.qty>=med*4)
+ .map(x=>({price:x.price,side:x.side,notional:x.price*x.qty,strength:x.price*x.qty/med}))
+ .sort((a,b)=>b.strength-a.strength).slice(0,20);
+
+ let removed=0,added=0;
+ if(lastDepth){
+  for(const side of ['bids','asks']){
+   const prev=new Map(lastDepth[side].map(x=>[x[0],x[1]]));
+   for(const [p,q] of book[side]){
+    const old=prev.get(p)||0;
+    if(old&&q<old*.5)removed++;
+    if(old&&q>old*1.5)added++;
+   }
+  }
+ }
+
+ const score=Math.max(-1,Math.min(1,imbalance*.7+(added-removed)*.01));
+
+ return{
+  ...book,mid,spread,imbalance,walls,score,
+  regime:score>.18?'BULLISH':score<-.18?'BEARISH':'NEUTRAL',
+  removed,added
+ };
+}
+
+function maxQty(d){
+ return Math.max(...[...d.bids,...d.asks].map(x=>x[1]),.000001);
+}
+
+function render(d){
+ el.mid.textContent=d.mid.toFixed(2);
+ el.spread.textContent=d.spread.toFixed(3);
+ el.imb.textContent=d.imbalance.toFixed(3);
+ el.regime.textContent=d.regime;
+ el.regime.className='v '+(d.regime==='BULLISH'?'good':d.regime==='BEARISH'?'bad':'');
+
+ el.walls.innerHTML=d.walls.map(w=>`<tr><td>${w.price.toFixed(2)}</td><td>${w.side}</td><td>${Math.round(w.notional).toLocaleString()}</td><td>${w.strength.toFixed(1)}x</td></tr>`).join('')
+ ||'<tr><td colspan="4" class="muted">No large walls</td></tr>';
+
+ const mq=maxQty(d),a=d.asks.slice(0,25).reverse(),b=d.bids.slice(0,25);
+
+ el.heatmap.innerHTML=
+ a.map(x=>`<div class="level"><div class="la" style="width:${Math.min(100,x[1]/mq*100)}%"></div><span class="price">${x[0].toFixed(2)}</span><div></div></div>`).join('')
+ +`<div class="level"><span></span><span class="price">${d.mid.toFixed(2)}</span><span></span></div>`
+ +b.map(x=>`<div class="level"><div></div><span class="price">${x[0].toFixed(2)}</span><div class="lb" style="width:${Math.min(100,x[1]/mq*100)}%"></div></div>`).join('');
+
+ el.book.innerHTML=[
+  ...a.slice(-10).map(x=>`<div class="side ask">${x[0].toFixed(2)} × ${x[1].toFixed(4)}</div>`),
+  `<div class="side price">MID ${d.mid.toFixed(2)}</div>`,
+  ...b.slice(0,10).map(x=>`<div class="side bid">${x[0].toFixed(2)} × ${x[1].toFixed(4)}</div>`)
+ ].join('');
+}
+
+function alertPush(type,msg){
+ const key=type+'|'+msg;
+ if(alertData[0]?.key===key)return;
+ alertData.unshift({key,type,msg,ts:Date.now()});
+ alertData=alertData.slice(0,30);
+ el.events.innerHTML=alertData.map(x=>`<div class="event">${new Date(x.ts).toLocaleTimeString()} — <b>${x.type}</b> ${x.msg}</div>`).join('');
+}
+
+async function fetchWithTimeout(url,ms){
+ const c=new AbortController();
+ const t=setTimeout(()=>c.abort(),ms);
+ try{
+  return await fetch(url,{
+   method:'GET',
+   cache:'no-store',
+   headers:{Accept:'application/json'},
+   signal:c.signal
+  });
+ }finally{clearTimeout(t)}
+}
+
+async function fetchProxy(lv){
+ const stamp=Date.now();
+ const url=`${XT_PROXY}?symbol=${encodeURIComponent(SYMBOL)}&level=${lv}&_=${stamp}`;
+ const started=performance.now();
+
+ diag(`V1.4.1 connection test
+Symbol: ${SYMBOL}
+Level: ${lv}
+Proxy-only mode
+
+Proxy URL: ${url}`);
+
+ const res=await fetchWithTimeout(url,8000);
+ const text=await res.text();
+
+ diag(`V1.4.1 connection test
+Symbol: ${SYMBOL}
+Level: ${lv}
+Proxy-only mode
+
+Proxy URL: ${url}
+HTTP: ${res.status} ${res.statusText}
+Content-Type: ${res.headers.get('content-type')||'unknown'}
+Bytes: ${text.length}
+Latency: ${Math.round(performance.now()-started)} ms
+
+${text.slice(0,1800)}`);
+
+ if(!res.ok)throw new Error(`PROXY HTTP ${res.status}`);
+
+ let payload;
+ try{payload=JSON.parse(text)}
+ catch{throw new Error('PROXY returned non-JSON data')}
+
+ return analyze(parseDepth(payload));
+}
+
+async function refreshDepth(){
+ if(busy)return;
+ busy=true;
+
+ const lv=Math.min(50,Math.max(1,Number(el.levels.value)||50));
+ setStatus('Connecting to XT through Liquidity Proxy…',false);
+
+ try{
+  const d=await fetchProxy(lv);
+
+  lastDepth={asks:d.asks,bids:d.bids};
+  historyData.push(d);
+  if(historyData.length>300)historyData.shift();
+
+  render(d);
+  setStatus('XT LIVE • '+new Date().toLocaleTimeString(),true);
+
+  diag(el.diag.textContent+
+  `
+
+SUCCESS • ${d.bids.length} bids / ${d.asks.length} asks • MID ${d.mid.toFixed(2)}`);
+
+  if(Math.abs(d.imbalance)>=.65)
+   alertPush('Imbalance','Top-10 imbalance '+d.imbalance.toFixed(2));
+
+  if(d.walls.length)
+   alertPush('Wall','Large '+d.walls[0].side+' wall near '+d.walls[0].price.toFixed(2));
+
+  if(d.removed>=3)
+   alertPush('Liquidity removal',d.removed+' levels changed sharply');
+
+ }catch(err){
+  el.dot.classList.remove('live');
+
+  const msg=err?.message||String(err);
+  const friendly=
+   err?.name==='AbortError'
+   ?'Proxy request timed out'
+   :(msg.includes('Failed to fetch')||msg.includes('NetworkError')
+    ?'Proxy blocked by browser/network'
+    :'XT proxy connection failed');
+
+  setStatus(friendly+' • '+msg,false);
+  diag(el.diag.textContent+`
+
+FINAL FAILURE: ${msg}
+
+If VPN is OFF and this happens, open the Proxy URL above directly in Chrome to verify the Worker.`);
+ }finally{
+  renderPaper();
+  busy=false;
+ }
+}
+
+function paperTrade(side){
+ if(!lastDepth)return alert('XT depth is not connected yet');
+ if(!historyData.length)return alert('No live price');
+ if(paperState.position)return alert('Position already open');
+
+ const price=historyData.at(-1).mid;
+ const q=n(el.qty.value);
+ const margin=price*q;
+
+ if(q<=0)return alert('Invalid quantity');
+ if(margin>paperState.balance)return alert('Insufficient paper balance');
+
+ paperState.balance-=margin;
+ paperState.position={side,qty:q,entry:price,margin};
+ renderPaper();
+}
+
+function closePaper(){
+ if(!paperState.position||!historyData.length)return;
+
+ const p=paperState.position;
+ const price=historyData.at(-1).mid;
+ const dir=p.side==='long'?1:-1;
+ const pnl=(price-p.entry)*p.qty*dir-(price*p.qty+p.entry*p.qty)*.0005;
+
+ paperState.balance+=p.margin+pnl;
+ paperState.trades.push({pnl});
+ paperState.position=null;
+ renderPaper();
+}
+
+function renderPaper(){
+ el.balance.textContent=paperState.balance.toFixed(2);
+ el.pnl.textContent=paperState.trades.reduce((s,x)=>s+x.pnl,0).toFixed(2);
+ el.trades.textContent=paperState.trades.length;
+ el.position.textContent=paperState.position
+ ?paperState.position.side.toUpperCase()+' @ '+paperState.position.entry.toFixed(2)
+ :'None';
+}
+
+document.getElementById('refreshBtn').addEventListener('click',refreshDepth);
+document.getElementById('longBtn').addEventListener('click',()=>paperTrade('long'));
+document.getElementById('shortBtn').addEventListener('click',()=>paperTrade('short'));
+document.getElementById('closeBtn').addEventListener('click',closePaper);
+el.levels.addEventListener('change',refreshDepth);
+
+renderPaper();
+refreshDepth();
+setInterval(refreshDepth,3000);
+</script>
+</body>
+</html>
