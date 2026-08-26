@@ -23,7 +23,7 @@
 </main><footer>Real trading is disabled. Market monitoring and paper trading only.</footer>
 <script>
 'use strict';
-const const XT_DEPTH='https://xt-ethusdt-proxy.ramin-ravangard64.workers.dev/';
+const XT_DEPTH='https://xt-ethusdt-proxy.ramin-ravangard64.workers.dev/';
 const el={dot:document.getElementById('dot'),status:document.getElementById('status'),mid:document.getElementById('mid'),spread:document.getElementById('spread'),imb:document.getElementById('imb'),regime:document.getElementById('regime'),levels:document.getElementById('levels'),heatmap:document.getElementById('heatmap'),book:document.getElementById('book'),walls:document.getElementById('walls'),events:document.getElementById('events'),balance:document.getElementById('balance'),pnl:document.getElementById('pnl'),trades:document.getElementById('trades'),position:document.getElementById('position'),qty:document.getElementById('qty')};
 let lastDepth=null,historyData=[],alertData=[];
 const paperState={balance:1000,position:null,trades:[]};
