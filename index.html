@@ -31,10 +31,22 @@ const n=x=>Number(x)||0;
 function setStatus(t,live=false){el.status.textContent=t;el.dot.classList.toggle('live',live)}
 function norm(rows){return Array.isArray(rows)?rows.map(x=>Array.isArray(x)?[n(x[0]),n(x[1])]:[n(x.price),n(x.quantity??x.qty??x.amount)]).filter(x=>x[0]>0&&x[1]>0):[]}
 function parseDepth(payload){
- const root=payload?.result??payload?.data??payload;
- const asks=norm(root?.asks??root?.a);const bids=norm(root?.bids??root?.b);
- if(!asks.length||!bids.length)throw new Error('XT returned no bids/asks');
- return {asks,bids,ts:Date.now()};
+  const root = payload?.result ?? payload?.data ?? payload;
+
+  const asks = norm(root?.a ?? root?.asks);
+  const bids = norm(root?.b ?? root?.bids);
+
+  if(!asks.length || !bids.length){
+    throw new Error(
+      `XT returned no bids/asks • bids=${bids.length} asks=${asks.length}`
+    );
+  }
+
+  return {
+    asks,
+    bids,
+    ts: Number(root?.t) || Date.now()
+  };
 }
 function analyze(book){
  book.asks.sort((a,b)=>a[0]-b[0]);book.bids.sort((a,b)=>b[0]-a[0]);
