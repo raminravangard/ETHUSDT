@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>XT CORS Test</title>
+</head>
+<body>
+  <h2>XT Proxy CORS Test</h2>
+  <pre id="result">Testing...</pre>
+
+  <script>
+    const result = document.getElementById("result");
+
+    const url =
+      "https://xt-ethusdt-liquidity-proxy.ramin-ravangard64.workers.dev/" +
+      "?symbol=eth_usdt&level=50&_=" + Date.now();
+
+    fetch(url, {
+      method: "GET",
+      cache: "no-store"
+    })
+      .then(async response => {
+        const text = await response.text();
+
+        result.textContent =
+          "SUCCESS\n\n" +
+          "HTTP: " + response.status + "\n" +
+          "Bytes: " + text.length + "\n\n" +
+          text.slice(0, 1000);
+      })
+      .catch(error => {
+        result.textContent =
+          "FAILED\n\n" +
+          error.name + " — " + error.message;
+      });
+  </script>
+</body>
+</html>
