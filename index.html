@@ -4,140 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07101d">
-<title>XT ETHUSDT Liquidity Map V1.5.2</title>
+<title>XT ETHUSDT Liquidity Map V1.5.3</title>
 
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- background:#060b12;
- color:#e8eef7;
+ margin:0;background:#060b12;color:#e8eef7;
  font:14px system-ui,-apple-system,Segoe UI,Roboto,sans-serif
 }
 header{
- position:sticky;
- top:0;
- z-index:5;
- background:#08111d;
- border-bottom:1px solid #1c2a3a;
- padding:12px 14px
+ position:sticky;top:0;z-index:5;background:#08111d;
+ border-bottom:1px solid #1c2a3a;padding:12px 14px
 }
 h1{font-size:17px;margin:0}
+h3{font-size:14px;margin:0 0 10px}
 .sub{font-size:11px;color:#8496aa;margin-top:3px}
-main{padding:10px;max-width:900px;margin:auto}
+main{padding:10px;max-width:1000px;margin:auto}
 .grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:8px
+ display:grid;grid-template-columns:repeat(2,1fr);gap:8px
 }
 .card{
- background:#0b1420;
- border:1px solid #1b2a3b;
- border-radius:12px;
- padding:11px;
- margin-bottom:9px
+ background:#0b1420;border:1px solid #1b2a3b;border-radius:12px;
+ padding:11px;margin-bottom:9px
 }
 .k{font-size:11px;color:#8294a8}
 .v{font-size:18px;font-weight:700;margin-top:3px}
 .status{display:flex;align-items:center;gap:7px}
 .dot{
- width:8px;
- height:8px;
- border-radius:50%;
- background:#f1b84b
+ width:8px;height:8px;border-radius:50%;background:#f1b84b
 }
 .live{background:#4de18b}
+.good{color:#52e495}
+.bad{color:#ff7183}
+.warn{color:#f1b84b}
+.muted{color:#7f91a5}
 button{
- border:1px solid #2b4057;
- background:#101c2b;
- color:#eef5ff;
- padding:9px 11px;
- border-radius:8px;
- font-weight:600
+ border:1px solid #2b4057;background:#101c2b;color:#eef5ff;
+ padding:9px 11px;border-radius:8px;font-weight:600
 }
 button:active{transform:scale(.98)}
 select,input{
- width:100%;
- background:#0a1421;
- color:#fff;
- border:1px solid #2b4057;
- border-radius:7px;
- padding:8px
+ width:100%;background:#0a1421;color:#fff;border:1px solid #2b4057;
+ border-radius:7px;padding:8px
 }
 .row{display:flex;gap:7px;align-items:center}
 .row>*{flex:1}
 #book{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:6px
+ display:grid;grid-template-columns:1fr 1fr;gap:6px
 }
 .side{
- padding:4px;
- border-radius:5px;
- background:#101b28
+ padding:4px;border-radius:5px;background:#101b28
 }
 .bid{border-left:3px solid #3ed58a}
 .ask{border-left:3px solid #ef6378}
 #heatmap{
- height:360px;
- overflow:auto;
- background:#070d15;
- border-radius:9px;
- padding:5px
+ height:360px;overflow:auto;background:#070d15;
+ border-radius:9px;padding:5px
 }
 .level{
- display:grid;
- grid-template-columns:1fr 72px 1fr;
- gap:4px;
- align-items:center;
- margin:2px 0
+ display:grid;grid-template-columns:1fr 72px 1fr;
+ gap:4px;align-items:center;margin:2px 0
 }
-.price{
- text-align:center;
- color:#cbd7e5;
- font-size:10px
-}
-.lb,.la{
- height:20px;
- border-radius:3px
-}
+.price{text-align:center;color:#cbd7e5;font-size:10px}
+.lb,.la{height:20px;border-radius:3px}
 .lb{background:linear-gradient(90deg,#163e2c,#0f2a20)}
 .la{background:linear-gradient(90deg,#351722,#551d2b)}
 table{
- width:100%;
- border-collapse:collapse;
- font-size:12px
+ width:100%;border-collapse:collapse;font-size:12px
 }
 td,th{
- padding:6px;
- border-bottom:1px solid #172535;
- text-align:right
+ padding:6px;border-bottom:1px solid #172535;text-align:right
 }
-.good{color:#52e495}
-.bad{color:#ff7183}
-.muted{color:#7f91a5}
 .event{
- padding:6px 0;
- border-bottom:1px solid #172535;
- font-size:12px
+ padding:6px 0;border-bottom:1px solid #172535;font-size:12px
 }
 .diag{
  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
- font-size:11px;
- white-space:pre-wrap;
- word-break:break-word;
- background:#070d15;
- border-radius:8px;
- padding:9px;
- color:#b8c7d9;
- max-height:330px;
- overflow:auto
+ font-size:11px;white-space:pre-wrap;word-break:break-word;
+ background:#070d15;border-radius:8px;padding:9px;color:#b8c7d9
+}
+.signal{
+ text-align:center;padding:14px;border-radius:10px;
+ background:#09111c;border:1px solid #203247
+}
+.signalMain{font-size:25px;font-weight:800;letter-spacing:.5px}
+.score{
+ font-size:12px;margin-top:5px;color:#9cafc2
+}
+.meter{
+ height:9px;background:#172535;border-radius:10px;
+ overflow:hidden;margin-top:9px
+}
+.meterFill{
+ height:100%;width:50%;transition:width .3s
+}
+.metric{
+ display:flex;justify-content:space-between;
+ padding:6px 0;border-bottom:1px solid #172535;
+ font-size:12px
 }
 footer{
- text-align:center;
- color:#62758b;
- font-size:10px;
- padding:15px
+ text-align:center;color:#62758b;font-size:10px;padding:15px
 }
 @media(min-width:720px){
  .grid{grid-template-columns:repeat(4,1fr)}
@@ -153,17 +120,16 @@ footer{
   <span id="dot" class="dot"></span>
   <div>
    <h1>XT ETHUSDT Liquidity Map</h1>
-   <div class="sub">V1.5.2 • XT Futures / Research & Paper Trading</div>
+   <div class="sub">V1.5.3 • XT Futures / Research & Paper Trading</div>
   </div>
  </div>
- <div id="status" class="sub">Starting XT Connection Engine…</div>
+ <div id="status" class="sub">Starting XT connection engine…</div>
 </header>
 
 <main>
 
 <section class="card">
  <div class="grid">
-
   <div>
    <div class="k">MID</div>
    <div id="mid" class="v">—</div>
@@ -183,7 +149,6 @@ footer{
    <div class="k">REGIME</div>
    <div id="regime" class="v">—</div>
   </div>
-
  </div>
 </section>
 
@@ -195,6 +160,48 @@ footer{
    <option value="20">20 levels</option>
    <option value="50" selected>50 levels</option>
   </select>
+ </div>
+</section>
+
+<section class="card wide">
+ <h3>Liquidity & Flow Signal</h3>
+
+ <div class="signal">
+  <div id="signalMain" class="signalMain">NO TRADE</div>
+  <div id="signalScore" class="score">
+   Waiting for sufficient market data…
+  </div>
+
+  <div class="meter">
+   <div id="signalMeter" class="meterFill"></div>
+  </div>
+ </div>
+
+ <div style="margin-top:10px">
+  <div class="metric">
+   <span>Liquidity Pressure</span>
+   <b id="pressure">—</b>
+  </div>
+
+  <div class="metric">
+   <span>Flow Burst</span>
+   <b id="burst">—</b>
+  </div>
+
+  <div class="metric">
+   <span>Price Velocity</span>
+   <b id="velocity">—</b>
+  </div>
+
+  <div class="metric">
+   <span>Liquidity Change</span>
+   <b id="liqChange">—</b>
+  </div>
+
+  <div class="metric">
+   <span>Confidence</span>
+   <b id="confidence">—</b>
+  </div>
  </div>
 </section>
 
@@ -228,6 +235,14 @@ footer{
 
   <tbody id="walls"></tbody>
  </table>
+</section>
+
+<section class="card">
+ <h3>Flow Analysis</h3>
+
+ <div id="flowInfo" class="muted">
+  Waiting for multiple snapshots…
+ </div>
 </section>
 
 <section class="card">
@@ -281,46 +296,33 @@ footer{
 
 <section class="card">
  <div class="muted">
-  V1.5.2: XT Connection Engine V4.5.1,
-  mobile-safe connection,
-  timeout protection,
-  reconnect,
-  safer depth parsing,
-  diagnostics,
-  liquidity heatmap,
-  walls,
-  imbalance,
-  regime,
-  and paper trading only.
+  V1.5.3: XT Connection Engine V4.5.1,
+  Liquidity Pressure, Flow Burst detection,
+  price velocity, liquidity changes, bias,
+  confidence scoring, NO TRADE protection,
+  liquidity walls, imbalance, regime,
+  diagnostics and paper trading only.
  </div>
 </section>
 
 </main>
 
 <footer>
- Real trading is disabled. Market monitoring and paper trading only.
+ Real trading is disabled.
+ Market monitoring and paper trading only.
 </footer>
 
 <script>
 'use strict';
 
 /* =========================================================
-   XT CONNECTION ENGINE V4.5.1
+   XT CONNECTION ENGINE
    ========================================================= */
 
 const XT_ENGINE =
-'https://xt-connection-engine-v4-5-1.ramin-ravangard64.workers.dev';
+ 'https://xt-connection-engine-v4-5-1.ramin-ravangard64.workers.dev';
 
 const SYMBOL='eth_usdt';
-
-const REQUEST_TIMEOUT=9000;
-const REFRESH_INTERVAL=3000;
-const MAX_RETRIES=2;
-
-
-/* =========================================================
-   DOM
-   ========================================================= */
 
 const el={
  dot:document.getElementById('dot'),
@@ -337,18 +339,28 @@ const el={
 
  heatmap:document.getElementById('heatmap'),
  book:document.getElementById('book'),
-
  walls:document.getElementById('walls'),
+
+ signalMain:document.getElementById('signalMain'),
+ signalScore:document.getElementById('signalScore'),
+ signalMeter:document.getElementById('signalMeter'),
+
+ pressure:document.getElementById('pressure'),
+ burst:document.getElementById('burst'),
+ velocity:document.getElementById('velocity'),
+ liqChange:document.getElementById('liqChange'),
+ confidence:document.getElementById('confidence'),
+
+ flowInfo:document.getElementById('flowInfo'),
+
  events:document.getElementById('events'),
 
  balance:document.getElementById('balance'),
  pnl:document.getElementById('pnl'),
  trades:document.getElementById('trades'),
  position:document.getElementById('position'),
-
  qty:document.getElementById('qty')
 };
-
 
 /* =========================================================
    STATE
@@ -367,7 +379,6 @@ const paperState={
 
 const n=x=>Number(x)||0;
 
-
 /* =========================================================
    STATUS
    ========================================================= */
@@ -379,46 +390,28 @@ function setStatus(text,live=false){
  el.dot.classList.toggle('live',live);
 }
 
-
-/* =========================================================
-   DIAGNOSTICS
-   ========================================================= */
-
 function diag(text){
 
  el.diag.textContent=text;
-
- el.diag.scrollTop=el.diag.scrollHeight;
 }
 
-
 /* =========================================================
-   NORMALIZE ORDER BOOK
+   NORMALIZE XT DEPTH
    ========================================================= */
 
 function norm(rows){
 
- if(!Array.isArray(rows))return[];
+ if(!Array.isArray(rows)) return [];
 
  return rows
-  .map(x=>{
-
-   if(Array.isArray(x)){
-    return[
-     n(x[0]),
-     n(x[1])
-    ];
-   }
-
-   return[
-    n(x?.price),
-    n(x?.quantity??x?.qty??x?.amount)
-   ];
-
-  })
+  .map(x=>Array.isArray(x)
+   ?[n(x[0]),n(x[1])]
+   :[
+     n(x?.price),
+     n(x?.quantity??x?.qty??x?.amount)
+    ])
   .filter(x=>x[0]>0&&x[1]>0);
 }
-
 
 /* =========================================================
    PARSE DEPTH
@@ -426,33 +419,29 @@ function norm(rows){
 
 function parseDepth(payload){
 
- const root =
-  payload?.result ??
-  payload?.data ??
+ const root=
+  payload?.result??
+  payload?.data??
   payload;
 
- const asks=norm(
-  root?.a ??
-  root?.asks
- );
+ const asks=
+  norm(root?.a??root?.asks);
 
- const bids=norm(
-  root?.b ??
-  root?.bids
- );
+ const bids=
+  norm(root?.b??root?.bids);
 
- if(!asks.length || !bids.length){
+ if(!asks.length||!bids.length){
 
-  const rc =
-   payload?.returnCode ??
-   payload?.code ??
-   payload?.error?.code ??
+  const rc=
+   payload?.returnCode??
+   payload?.code??
+   payload?.error?.code??
    'n/a';
 
-  const msg =
-   payload?.error?.msg ??
-   payload?.msg ??
-   payload?.message ??
+  const msg=
+   payload?.error?.msg??
+   payload?.msg??
+   payload?.message??
    'none';
 
   throw new Error(
@@ -467,33 +456,137 @@ function parseDepth(payload){
  };
 }
 
-
 /* =========================================================
-   ANALYZE
+   ORDER BOOK ANALYSIS
    ========================================================= */
 
 function analyze(book){
 
- book.asks.sort(
-  (a,b)=>a[0]-b[0]
- );
-
- book.bids.sort(
-  (a,b)=>b[0]-a[0]
- );
+ book.asks.sort((a,b)=>a[0]-b[0]);
+ book.bids.sort((a,b)=>b[0]-a[0]);
 
  const bid=book.bids[0]?.[0];
  const ask=book.asks[0]?.[0];
 
- if(!bid||!ask){
-  throw new Error('Empty depth');
- }
+ if(!bid||!ask)
+  throw new Error('empty depth');
 
  const mid=(bid+ask)/2;
 
  const spread=ask-bid;
 
+ /* Top 10 notional */
+
  const nb=
+  book.bids
+   .slice(0,10)
+   .reduce((s,x)=>s+x[0]*x[1],0);
+
+ const na=
+  book.asks
+   .slice(0,10)
+   .reduce((s,x)=>s+x[0]*x[1],0);
+
+ const imbalance=
+  (nb-na)/(nb+na||1);
+
+ /* Median liquidity */
+
+ const values=
+  [...book.bids,...book.asks]
+   .map(x=>x[0]*x[1])
+   .sort((a,b)=>a-b);
+
+ const med=
+  values[Math.floor(values.length/2)]||1;
+
+ /* Walls */
+
+ const walls=[
+  ...book.bids.map(x=>({
+   price:x[0],
+   qty:x[1],
+   side:'bid'
+  })),
+
+  ...book.asks.map(x=>({
+   price:x[0],
+   qty:x[1],
+   side:'ask'
+  }))
+ ]
+ .filter(x=>x.price*x.qty>=med*4)
+ .map(x=>({
+  price:x.price,
+  side:x.side,
+  notional:x.price*x.qty,
+  strength:x.price*x.qty/med
+ }))
+ .sort((a,b)=>b.strength-a.strength)
+ .slice(0,20);
+
+ /* Liquidity changes */
+
+ let removed=0;
+ let added=0;
+
+ let changedNotional=0;
+
+ if(lastDepth){
+
+  for(const side of ['bids','asks']){
+
+   const prev=
+    new Map(
+     lastDepth[side].map(x=>[x[0],x[1]])
+    );
+
+   for(const [p,q] of book[side]){
+
+    const old=prev.get(p)||0;
+
+    if(old){
+
+     if(q<old*.5){
+      removed++;
+      changedNotional+=
+       Math.abs(old-q)*p;
+     }
+
+     if(q>old*1.5){
+      added++;
+      changedNotional+=
+       Math.abs(q-old)*p;
+     }
+    }
+   }
+  }
+ }
+
+ /* Price velocity */
+
+ let velocity=0;
+
+ if(historyData.length){
+
+  const previous=
+   historyData.at(-1);
+
+  const dt=
+   Math.max(
+    1,
+    Date.now()-previous.localTs
+   );
+
+  velocity=
+   ((mid-previous.mid)/mid)*
+   1000000/
+   dt;
+ }
+
+ /* Wall pressure */
+
+ const nearBids=
   book.bids
    .slice(0,10)
    .reduce(
@@ -501,7 +594,7 @@ function analyze(book){
     0
    );
 
- const na=
+ const nearAsks=
   book.asks
    .slice(0,10)
    .reduce(
@@ -509,149 +602,112 @@ function analyze(book){
     0
    );
 
- const imbalance=
-  (nb-na)/(nb+na||1);
+ const wallBid=
+  walls
+   .filter(x=>x.side==='bid')
+   .slice(0,5)
+   .reduce((s,x)=>s+x.strength,0);
 
+ const wallAsk=
+  walls
+   .filter(x=>x.side==='ask')
+   .slice(0,5)
+   .reduce((s,x)=>s+x.strength,0);
 
- /* ---------------------------------------------
-    MEDIAN LIQUIDITY
-    --------------------------------------------- */
+ const wallPressure=
+  (wallBid-wallAsk)/
+  (wallBid+wallAsk||1);
 
- const values=[
-  ...book.bids,
-  ...book.asks
- ]
- .map(
-  x=>x[0]*x[1]
- )
- .sort(
-  (a,b)=>a-b
- );
+ /* Liquidity pressure */
 
- const med=
-  values[
-   Math.floor(values.length/2)
-  ] || 1;
-
-
- /* ---------------------------------------------
-    LIQUIDITY WALLS
-    --------------------------------------------- */
-
- const walls=[
-
-  ...book.bids.map(
-   x=>({
-    price:x[0],
-    qty:x[1],
-    side:'bid'
-   })
-  ),
-
-  ...book.asks.map(
-   x=>({
-    price:x[0],
-    qty:x[1],
-    side:'ask'
-   })
-  )
-
- ]
- .filter(
-  x=>x.price*x.qty>=med*4
- )
- .map(
-  x=>({
-
-   price:x.price,
-   side:x.side,
-
-   notional:x.price*x.qty,
-
-   strength:
-    x.price*x.qty/med
-
-  })
- )
- .sort(
-  (a,b)=>b.strength-a.strength
- )
- .slice(0,20);
-
-
- /* ---------------------------------------------
-    LIQUIDITY CHANGES
-    --------------------------------------------- */
-
- let removed=0;
- let added=0;
-
- if(lastDepth){
-
-  for(
-   const side of ['bids','asks']
-  ){
-
-   const previous=
-    new Map(
-     lastDepth[side].map(
-      x=>[x[0],x[1]]
-     )
-    );
-
-   for(
-    const [price,qty]
-    of book[side]
-   ){
-
-    const old=
-     previous.get(price)||0;
-
-    if(
-     old &&
-     qty<old*.5
-    ){
-     removed++;
-    }
-
-    if(
-     old &&
-     qty>old*1.5
-    ){
-     added++;
-    }
-
-   }
-  }
- }
-
-
- /* ---------------------------------------------
-    SIGNAL SCORE
-    --------------------------------------------- */
-
- const score=
+ const pressure=
   Math.max(
    -1,
    Math.min(
     1,
-    imbalance*.7+
-    (added-removed)*.01
+    imbalance*.55+
+    wallPressure*.25+
+    (added-removed)*.015
    )
   );
 
+ /* Flow burst */
 
- let regime='NEUTRAL';
+ const changeIntensity=
+  Math.min(
+   1,
+   (added+removed)/12
+  );
 
- if(score>.18)
-  regime='BULLISH';
+ const velocityIntensity=
+  Math.min(
+   1,
+   Math.abs(velocity)/3
+  );
 
- if(score<-.18)
-  regime='BEARISH';
+ const burst=
+  Math.min(
+   1,
+   changeIntensity*.55+
+   velocityIntensity*.45
+  );
 
+ /* Confidence */
+
+ const agreement=
+  (
+   Math.abs(imbalance)+
+   Math.abs(wallPressure)+
+   Math.abs(pressure)
+  )/3;
+
+ let confidence=
+  Math.round(
+   Math.min(
+    100,
+    agreement*100+
+    burst*20
+   )
+  );
+
+ /* Bias */
+
+ let bias='NEUTRAL';
+
+ if(pressure>.18)
+  bias='BULLISH';
+
+ else if(pressure<-.18)
+  bias='BEARISH';
+
+ /* Signal */
+
+ let signal='NO TRADE';
+
+ if(
+  bias==='BULLISH' &&
+  confidence>=60 &&
+  burst>=.35
+ ){
+  signal='LONG BIAS';
+ }
+
+ else if(
+  bias==='BEARISH' &&
+  confidence>=60 &&
+  burst>=.35
+ ){
+  signal='SHORT BIAS';
+ }
+
+ else if(
+  confidence>=40 &&
+  burst>=.20
+ ){
+  signal='WATCH';
+ }
 
  return{
-
   ...book,
 
   mid,
@@ -660,18 +716,28 @@ function analyze(book){
 
   walls,
 
-  score,
-
-  regime,
-
+  added,
   removed,
-  added
+  changedNotional,
+
+  velocity,
+
+  pressure,
+  wallPressure,
+
+  burst,
+  confidence,
+
+  bias,
+  signal,
+
+  nearBids,
+  nearAsks
  };
 }
 
-
 /* =========================================================
-   MAX QTY
+   HEATMAP
    ========================================================= */
 
 function maxQty(d){
@@ -680,16 +746,13 @@ function maxQty(d){
   ...[
    ...d.bids,
    ...d.asks
-  ].map(
-   x=>x[1]
-  ),
+  ].map(x=>x[1]),
   .000001
  );
 }
 
-
 /* =========================================================
-   RENDER
+   RENDER MAIN
    ========================================================= */
 
 function render(d){
@@ -703,167 +766,239 @@ function render(d){
  el.imb.textContent=
   d.imbalance.toFixed(3);
 
+ el.imb.className=
+  'v '+
+  (
+   d.imbalance>.15
+   ?'good'
+   :d.imbalance<-.15
+    ?'bad'
+    :''
+  );
+
  el.regime.textContent=
-  d.regime;
+  d.bias;
 
  el.regime.className=
   'v '+
   (
-   d.regime==='BULLISH'
+   d.bias==='BULLISH'
     ?'good'
-    :d.regime==='BEARISH'
+    :d.bias==='BEARISH'
      ?'bad'
      :''
   );
 
+ /* Signal */
 
- /* ---------------------------------------------
-    WALLS
-    --------------------------------------------- */
+ el.signalMain.textContent=
+  d.signal;
+
+ el.signalMain.className=
+  'signalMain '+
+  (
+   d.signal==='LONG BIAS'
+    ?'good'
+    :d.signal==='SHORT BIAS'
+     ?'bad'
+     :d.signal==='WATCH'
+      ?'warn'
+      :''
+  );
+
+ el.signalScore.textContent=
+  `Pressure ${d.pressure.toFixed(3)} • Confidence ${d.confidence}%`;
+
+ el.signalMeter.style.width=
+  Math.min(100,d.confidence)+'%';
+
+ el.pressure.textContent=
+  d.pressure.toFixed(3);
+
+ el.pressure.className=
+  d.pressure>0
+   ?'good'
+   :d.pressure<0
+    ?'bad'
+    :'';
+
+ el.burst.textContent=
+  d.burst>=.65
+   ?'STRONG'
+   :d.burst>=.35
+    ?'ACTIVE'
+    :'LOW';
+
+ el.burst.className=
+  d.burst>=.65
+   ?'bad'
+   :d.burst>=.35
+    ?'warn'
+    :'';
+
+ el.velocity.textContent=
+  d.velocity.toFixed(3);
+
+ el.liqChange.textContent=
+  `+${d.added} / -${d.removed}`;
+
+ el.confidence.textContent=
+  d.confidence+'%';
+
+ /* Walls */
 
  el.walls.innerHTML=
-  d.walls
-   .map(
-    w=>`
-     <tr>
-      <td>${w.price.toFixed(2)}</td>
-      <td>${w.side}</td>
-      <td>${Math.round(w.notional).toLocaleString()}</td>
-      <td>${w.strength.toFixed(1)}x</td>
-     </tr>
-    `
-   )
-   .join('')
-   ||
-   `
-    <tr>
-     <td colspan="4" class="muted">
-      No large walls
-     </td>
-    </tr>
-   `;
+  d.walls.map(w=>`
+   <tr>
+    <td>${w.price.toFixed(2)}</td>
+    <td>${w.side}</td>
+    <td>${Math.round(w.notional).toLocaleString()}</td>
+    <td>${w.strength.toFixed(1)}x</td>
+   </tr>
+  `).join('')
+  ||
+  `<tr>
+   <td colspan="4" class="muted">
+    No large walls
+   </td>
+  </tr>`;
 
-
- /* ---------------------------------------------
-    HEATMAP
-    --------------------------------------------- */
+ /* Heatmap */
 
  const mq=maxQty(d);
 
- const asks=
+ const a=
   d.asks
    .slice(0,25)
    .reverse();
 
- const bids=
+ const b=
   d.bids
    .slice(0,25);
 
-
  el.heatmap.innerHTML=
 
-  asks
-   .map(
-    x=>`
-     <div class="level">
-
-      <div
-       class="la"
-       style="width:${Math.min(
-        100,
-        x[1]/mq*100
-       )}%"
-      ></div>
-
-      <span class="price">
-       ${x[0].toFixed(2)}
-      </span>
-
-      <div></div>
-
-     </div>
-    `
-   )
-   .join('')
-
-  +
-
-  `
+  a.map(x=>`
    <div class="level">
-    <span></span>
+    <div
+     class="la"
+     style="width:${Math.min(
+      100,
+      x[1]/mq*100
+     )}%">
+    </div>
+
     <span class="price">
-     ${d.mid.toFixed(2)}
+     ${x[0].toFixed(2)}
     </span>
-    <span></span>
+
+    <div></div>
    </div>
-  `
+  `).join('')
 
   +
 
-  bids
-   .map(
-    x=>`
-     <div class="level">
+  `<div class="level">
+   <span></span>
+   <span class="price">
+    ${d.mid.toFixed(2)}
+   </span>
+   <span></span>
+  </div>`
 
-      <div></div>
+  +
 
-      <span class="price">
-       ${x[0].toFixed(2)}
-      </span>
+  b.map(x=>`
+   <div class="level">
 
-      <div
-       class="lb"
-       style="width:${Math.min(
-        100,
-        x[1]/mq*100
-       )}%"
-      ></div>
+    <div></div>
 
-     </div>
-    `
-   )
-   .join('');
+    <span class="price">
+     ${x[0].toFixed(2)}
+    </span>
 
+    <div
+     class="lb"
+     style="width:${Math.min(
+      100,
+      x[1]/mq*100
+     )}%">
+    </div>
 
- /* ---------------------------------------------
-    ORDER BOOK
-    --------------------------------------------- */
+   </div>
+  `).join('');
+
+ /* Order Book */
 
  el.book.innerHTML=[
 
-  ...asks
+  ...a
    .slice(-10)
-   .map(
-    x=>`
-     <div class="side ask">
-      ${x[0].toFixed(2)}
-      ×
-      ${x[1].toFixed(4)}
-     </div>
-    `
-   ),
+   .map(x=>`
+    <div class="side ask">
+     ${x[0].toFixed(2)}
+     ×
+     ${x[1].toFixed(4)}
+    </div>
+   `),
 
-  `
-   <div class="side price">
-    MID ${d.mid.toFixed(2)}
-   </div>
-  `,
+  `<div class="side price">
+   MID ${d.mid.toFixed(2)}
+  </div>`,
 
-  ...bids
+  ...b
    .slice(0,10)
-   .map(
-    x=>`
-     <div class="side bid">
-      ${x[0].toFixed(2)}
-      ×
-      ${x[1].toFixed(4)}
-     </div>
-    `
-   )
+   .map(x=>`
+    <div class="side bid">
+     ${x[0].toFixed(2)}
+     ×
+     ${x[1].toFixed(4)}
+    </div>
+   `)
 
  ].join('');
-}
 
+ /* Flow information */
+
+ el.flowInfo.innerHTML=
+ `
+ <div class="metric">
+  <span>Bid pressure</span>
+  <b>${d.nearBids.toLocaleString(
+   undefined,
+   {maximumFractionDigits:0}
+  )}</b>
+ </div>
+
+ <div class="metric">
+  <span>Ask pressure</span>
+  <b>${d.nearAsks.toLocaleString(
+   undefined,
+   {maximumFractionDigits:0}
+  )}</b>
+ </div>
+
+ <div class="metric">
+  <span>Added levels</span>
+  <b class="good">${d.added}</b>
+ </div>
+
+ <div class="metric">
+  <span>Removed levels</span>
+  <b class="bad">${d.removed}</b>
+ </div>
+
+ <div class="metric">
+  <span>Flow state</span>
+  <b>${d.burst>=.65
+   ?'STRONG BURST'
+   :d.burst>=.35
+    ?'ACTIVE'
+    :'CALM'
+  }</b>
+ </div>
+ `;
+}
 
 /* =========================================================
    ALERTS
@@ -874,19 +1009,14 @@ function alertPush(type,msg){
  const key=
   type+'|'+msg;
 
- if(
-  alertData[0]?.key===key
- ){
+ if(alertData[0]?.key===key)
   return;
- }
 
  alertData.unshift({
-
   key,
   type,
   msg,
   ts:Date.now()
-
  });
 
  alertData=
@@ -894,19 +1024,16 @@ function alertPush(type,msg){
 
  el.events.innerHTML=
   alertData
-   .map(
-    x=>`
-     <div class="event">
-      ${new Date(x.ts).toLocaleTimeString()}
-      —
-      <b>${x.type}</b>
-      ${x.msg}
-     </div>
-    `
-   )
+   .map(x=>`
+    <div class="event">
+     ${new Date(x.ts).toLocaleTimeString()}
+     —
+     <b>${x.type}</b>
+     ${x.msg}
+    </div>
+   `)
    .join('');
 }
-
 
 /* =========================================================
    FETCH WITH TIMEOUT
@@ -917,12 +1044,12 @@ async function fetchWithTimeout(
  ms
 ){
 
- const controller=
+ const c=
   new AbortController();
 
  const timer=
   setTimeout(
-   ()=>controller.abort(),
+   ()=>c.abort(),
    ms
   );
 
@@ -932,47 +1059,40 @@ async function fetchWithTimeout(
    url,
    {
     method:'GET',
-
     cache:'no-store',
-
     headers:{
      Accept:'application/json'
     },
-
-    signal:
-     controller.signal
+    signal:c.signal
    }
   );
 
  }finally{
 
   clearTimeout(timer);
-
  }
 }
 
-
 /* =========================================================
-   FETCH ENGINE
+   FETCH V4.5.1
    ========================================================= */
 
-async function fetchEngine(level){
+async function fetchEngine(lv){
 
  const stamp=
   Date.now();
 
  const url=
-  `${XT_ENGINE}/api/depth?`+
-  `symbol=${encodeURIComponent(SYMBOL)}`+
-  `&level=${level}`+
+  `${XT_ENGINE}/api/depth`+
+  `?symbol=${encodeURIComponent(SYMBOL)}`+
+  `&level=${lv}`+
   `&_=${stamp}`;
 
  const started=
   performance.now();
 
-
  diag(
-`V1.5.2 CONNECTION ENGINE
+ `V1.5.3 CONNECTION ENGINE
 
 Worker:
 ${XT_ENGINE}
@@ -984,31 +1104,27 @@ Symbol:
 ${SYMBOL}
 
 Level:
-${level}
-
-Timeout:
-${REQUEST_TIMEOUT} ms
+${lv}
 
 Connecting…`
  );
 
+ const res=
+  await fetchWithTimeout(
+   url,
+   9000
+  );
 
- let lastError=null;
+ const text=
+  await res.text();
 
+ const latency=
+  Math.round(
+   performance.now()-started
+  );
 
- for(
-  let attempt=1;
-  attempt<=MAX_RETRIES+1;
-  attempt++
- ){
-
-  try{
-
-   diag(
-`V1.5.2 CONNECTION ENGINE
-
-Attempt:
-${attempt}/${MAX_RETRIES+1}
+ diag(
+ `V1.5.3 CONNECTION ENGINE
 
 Worker:
 ${XT_ENGINE}
@@ -1020,34 +1136,7 @@ Symbol:
 ${SYMBOL}
 
 Level:
-${level}
-
-Connecting…`
-   );
-
-
-   const res=
-    await fetchWithTimeout(
-     url,
-     REQUEST_TIMEOUT
-    );
-
-
-   const text=
-    await res.text();
-
-
-   const latency=
-    Math.round(
-     performance.now()-started
-    );
-
-
-   diag(
-`V1.5.2 CONNECTION ENGINE
-
-Attempt:
-${attempt}/${MAX_RETRIES+1}
+${lv}
 
 HTTP:
 ${res.status} ${res.statusText}
@@ -1060,72 +1149,33 @@ ${latency} ms
 
 Response:
 ${text.slice(0,1800)}`
-   );
+ );
 
+ if(!res.ok){
 
-   if(!res.ok){
-
-    throw new Error(
-     `ENGINE HTTP ${res.status}`
-    );
-
-   }
-
-
-   let payload;
-
-   try{
-
-    payload=
-     JSON.parse(text);
-
-   }catch{
-
-    throw new Error(
-     'Engine returned non-JSON data'
-    );
-
-   }
-
-
-   const parsed=
-    analyze(
-     parseDepth(payload)
-    );
-
-
-   return parsed;
-
-
-  }catch(err){
-
-   lastError=err;
-
-   if(
-    attempt<=MAX_RETRIES
-   ){
-
-    await new Promise(
-     resolve=>
-      setTimeout(
-       resolve,
-       1200
-      )
-    );
-
-   }
-
-  }
-
+  throw new Error(
+   `ENGINE HTTP ${res.status}`
+  );
  }
 
+ let payload;
 
- throw lastError ||
-  new Error(
-   'Connection failed'
+ try{
+
+  payload=
+   JSON.parse(text);
+
+ }catch{
+
+  throw new Error(
+   'ENGINE returned non-JSON data'
   );
-}
+ }
 
+ return analyze(
+  parseDepth(payload)
+ );
+}
 
 /* =========================================================
    REFRESH
@@ -1138,7 +1188,6 @@ async function refreshDepth(){
 
  busy=true;
 
-
  const lv=
   Math.min(
    50,
@@ -1148,36 +1197,37 @@ async function refreshDepth(){
    )
   );
 
-
  setStatus(
-  'Connecting to XT through V4.5.1…',
+  'Connecting through V4.5.1…',
   false
  );
-
 
  try{
 
   const d=
    await fetchEngine(lv);
 
+  const localTs=
+   Date.now();
+
+  d.localTs=
+   localTs;
+
+  /* Save snapshot */
+
+  historyData.push(d);
+
+  if(historyData.length>300)
+   historyData.shift();
+
+  /* Update last depth AFTER analysis */
 
   lastDepth={
    asks:d.asks,
    bids:d.bids
   };
 
-
-  historyData.push(d);
-
-  if(
-   historyData.length>300
-  ){
-   historyData.shift();
-  }
-
-
   render(d);
-
 
   setStatus(
    'XT LIVE • '+
@@ -1185,20 +1235,24 @@ async function refreshDepth(){
    true
   );
 
-
   diag(
    el.diag.textContent+
    `
 
 SUCCESS
+
 Bids: ${d.bids.length}
 Asks: ${d.asks.length}
 MID: ${d.mid.toFixed(2)}
 Spread: ${d.spread.toFixed(3)}
 Imbalance: ${d.imbalance.toFixed(3)}
-Regime: ${d.regime}`
+Pressure: ${d.pressure.toFixed(3)}
+Burst: ${d.burst.toFixed(2)}
+Confidence: ${d.confidence}%
+Signal: ${d.signal}`
   );
 
+  /* Alerts */
 
   if(
    Math.abs(d.imbalance)>=.65
@@ -1209,50 +1263,67 @@ Regime: ${d.regime}`
     'Top-10 imbalance '+
     d.imbalance.toFixed(2)
    );
-
   }
 
+  if(d.walls.length){
 
-  if(
-   d.walls.length
-  ){
+   const w=
+    d.walls[0];
 
    alertPush(
     'Wall',
     'Large '+
-    d.walls[0].side+
+    w.side+
     ' wall near '+
-    d.walls[0].price.toFixed(2)
+    w.price.toFixed(2)
    );
-
   }
 
-
-  if(
-   d.removed>=3
-  ){
+  if(d.removed>=3){
 
    alertPush(
     'Liquidity removal',
     d.removed+
     ' levels changed sharply'
    );
-
   }
 
-
-  if(
-   d.added>=3
-  ){
+  if(d.added>=3){
 
    alertPush(
     'Liquidity added',
     d.added+
     ' levels increased sharply'
    );
-
   }
 
+  if(d.burst>=.65){
+
+   alertPush(
+    'FLOW BURST',
+    'Strong liquidity/velocity activity'
+   );
+  }
+
+  if(d.signal==='LONG BIAS'){
+
+   alertPush(
+    'LONG BIAS',
+    'Pressure and flow align • '+
+    d.confidence+
+    '% confidence'
+   );
+  }
+
+  if(d.signal==='SHORT BIAS'){
+
+   alertPush(
+    'SHORT BIAS',
+    'Pressure and flow align • '+
+    d.confidence+
+    '% confidence'
+   );
+  }
 
  }catch(err){
 
@@ -1260,52 +1331,24 @@ Regime: ${d.regime}`
    'live'
   );
 
-
   const msg=
    err?.message||
    String(err);
 
-
-  let friendly=
-   'Connection failed';
-
-
-  if(
+  const friendly=
    err?.name==='AbortError'
-  ){
-
-   friendly=
-    'Connection timeout';
-
-  }else if(
-   msg.includes(
-    'Failed to fetch'
-   )||
-   msg.includes(
-    'NetworkError'
-   )
-  ){
-
-   friendly=
-    'Network / VPN issue';
-
-  }else if(
-   msg.includes(
-    'No usable order book'
-   )
-  ){
-
-   friendly=
-    'Invalid XT depth response';
-
-  }
-
+    ?'Connection timed out'
+    :(msg.includes('Failed to fetch')||
+      msg.includes('NetworkError')
+      ?'Worker blocked by browser/network'
+      :'XT engine connection failed');
 
   setStatus(
-   friendly+' • '+msg,
+   friendly+
+   ' • '+
+   msg,
    false
   );
-
 
   diag(
    el.diag.textContent+
@@ -1314,23 +1357,17 @@ Regime: ${d.regime}`
 FINAL FAILURE:
 ${msg}
 
-Try:
-1. Refresh
-2. VPN ON/OFF test
-3. Open Worker /diagnostics
-4. Retry`
+Try Reconnect / Refresh.
+`
   );
-
 
  }finally{
 
   renderPaper();
 
   busy=false;
-
  }
 }
-
 
 /* =========================================================
    PAPER TRADING
@@ -1347,7 +1384,6 @@ function paperTrade(side){
   return;
  }
 
-
  if(!historyData.length){
 
   alert(
@@ -1357,10 +1393,7 @@ function paperTrade(side){
   return;
  }
 
-
- if(
-  paperState.position
- ){
+ if(paperState.position){
 
   alert(
    'Position already open'
@@ -1369,18 +1402,14 @@ function paperTrade(side){
   return;
  }
 
-
  const price=
   historyData.at(-1).mid;
-
 
  const q=
   n(el.qty.value);
 
-
  const margin=
   price*q;
-
 
  if(q<=0){
 
@@ -1391,10 +1420,8 @@ function paperTrade(side){
   return;
  }
 
-
- if(
-  margin>paperState.balance
- ){
+ if(margin>
+    paperState.balance){
 
   alert(
    'Insufficient paper balance'
@@ -1403,10 +1430,8 @@ function paperTrade(side){
   return;
  }
 
-
  paperState.balance-=
   margin;
-
 
  paperState.position={
   side,
@@ -1415,10 +1440,8 @@ function paperTrade(side){
   margin
  };
 
-
  renderPaper();
 }
-
 
 /* =========================================================
    CLOSE PAPER
@@ -1429,24 +1452,19 @@ function closePaper(){
  if(
   !paperState.position||
   !historyData.length
- ){
+ )
   return;
- }
-
 
  const p=
   paperState.position;
 
-
  const price=
   historyData.at(-1).mid;
-
 
  const dir=
   p.side==='long'
    ?1
    :-1;
-
 
  const pnl=
   (price-p.entry)*
@@ -1455,34 +1473,29 @@ function closePaper(){
   -
   (price*p.qty+
    p.entry*p.qty)*
-  .0005;
-
+   .0005;
 
  paperState.balance+=
   p.margin+pnl;
-
 
  paperState.trades.push({
   pnl
  });
 
-
- paperState.position=null;
-
+ paperState.position=
+  null;
 
  renderPaper();
 }
 
-
 /* =========================================================
-   PAPER DISPLAY
+   PAPER UI
    ========================================================= */
 
 function renderPaper(){
 
  el.balance.textContent=
   paperState.balance.toFixed(2);
-
 
  el.pnl.textContent=
   paperState.trades
@@ -1492,23 +1505,18 @@ function renderPaper(){
    )
    .toFixed(2);
 
-
  el.trades.textContent=
   paperState.trades.length;
 
-
  el.position.textContent=
   paperState.position
-
    ?paperState.position.side
      .toUpperCase()+
      ' @ '+
      paperState.position.entry
       .toFixed(2)
-
    :'None';
 }
-
 
 /* =========================================================
    EVENTS
@@ -1521,14 +1529,12 @@ document
   refreshDepth
  );
 
-
 document
  .getElementById('longBtn')
  .addEventListener(
   'click',
   ()=>paperTrade('long')
  );
-
 
 document
  .getElementById('shortBtn')
@@ -1537,7 +1543,6 @@ document
   ()=>paperTrade('short')
  );
 
-
 document
  .getElementById('closeBtn')
  .addEventListener(
@@ -1545,13 +1550,11 @@ document
   closePaper
  );
 
-
 el.levels
  .addEventListener(
   'change',
   refreshDepth
  );
-
 
 /* =========================================================
    START
@@ -1563,7 +1566,7 @@ refreshDepth();
 
 setInterval(
  refreshDepth,
- REFRESH_INTERVAL
+ 3000
 );
 
 </script>
