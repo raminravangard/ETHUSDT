@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07101d">
-<title>XT ETHUSDT Liquidity Map V1.5.4</title>
+<title>XT ETHUSDT Liquidity Map V1.5.5</title>
 
 <style>
 *{box-sizing:border-box}
@@ -17,10 +17,11 @@ header{
  border-bottom:1px solid #1c2a3a;padding:12px 14px
 }
 h1{font-size:17px;margin:0}
-h3{margin:0 0 9px;font-size:14px}
 .sub{font-size:11px;color:#8496aa;margin-top:3px}
 main{padding:10px;max-width:900px;margin:auto}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.grid{
+ display:grid;grid-template-columns:repeat(2,1fr);gap:8px
+}
 .card{
  background:#0b1420;border:1px solid #1b2a3b;
  border-radius:12px;padding:11px;margin-bottom:9px
@@ -28,7 +29,9 @@ main{padding:10px;max-width:900px;margin:auto}
 .k{font-size:11px;color:#8294a8}
 .v{font-size:18px;font-weight:700;margin-top:3px}
 .status{display:flex;align-items:center;gap:7px}
-.dot{width:8px;height:8px;border-radius:50%;background:#f1b84b}
+.dot{
+ width:8px;height:8px;border-radius:50%;background:#f1b84b
+}
 .live{background:#4de18b}
 button{
  border:1px solid #2b4057;background:#101c2b;color:#eef5ff;
@@ -41,113 +44,59 @@ select,input{
 }
 .row{display:flex;gap:7px;align-items:center}
 .row>*{flex:1}
-
-.signalBox{
- border:1px solid #2b4057;
- background:#09121e;
- border-radius:10px;
- padding:12px;
- margin-top:8px
-}
 .signal{
- font-size:21px;
- font-weight:800;
- letter-spacing:.3px
+ border:1px solid #2b4057;border-radius:10px;
+ padding:12px;background:#08111d;margin-top:8px
 }
-.signal.watch{color:#f1c75b}
-.signal.long{color:#4de18b}
-.signal.short{color:#ff7183}
-.signal.none{color:#91a2b6}
-
-.metricGrid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:7px;
- margin-top:9px
+.signalMain{
+ font-size:21px;font-weight:800;letter-spacing:.5px
 }
-.metric{
- background:#07101a;
- border:1px solid #18293a;
- border-radius:8px;
- padding:8px
-}
-.metric .value{
- font-weight:700;
- font-size:15px;
- margin-top:2px
-}
-
+.signalLong{color:#52e495}
+.signalShort{color:#ff7183}
+.signalWatch{color:#f1b84b}
+.signalNone{color:#8294a8}
 #book{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:6px
+ display:grid;grid-template-columns:1fr 1fr;gap:6px
 }
 .side{padding:4px;border-radius:5px;background:#101b28}
 .bid{border-left:3px solid #3ed58a}
 .ask{border-left:3px solid #ef6378}
-
 #heatmap{
- height:360px;
- overflow:auto;
- background:#070d15;
- border-radius:9px;
- padding:5px
+ height:360px;overflow:auto;background:#070d15;
+ border-radius:9px;padding:5px
 }
 .level{
- display:grid;
- grid-template-columns:1fr 72px 1fr;
- gap:4px;
- align-items:center;
- margin:2px 0
+ display:grid;grid-template-columns:1fr 72px 1fr;
+ gap:4px;align-items:center;margin:2px 0
 }
 .price{text-align:center;color:#cbd7e5;font-size:10px}
 .lb,.la{height:20px;border-radius:3px}
 .lb{background:linear-gradient(90deg,#163e2c,#0f2a20)}
 .la{background:linear-gradient(90deg,#351722,#551d2b)}
-
 table{
- width:100%;
- border-collapse:collapse;
- font-size:12px
+ width:100%;border-collapse:collapse;font-size:12px
 }
 td,th{
- padding:6px;
- border-bottom:1px solid #172535;
- text-align:right
+ padding:6px;border-bottom:1px solid #172535;text-align:right
 }
 .good{color:#52e495}
 .bad{color:#ff7183}
-.warn{color:#f1c75b}
+.warn{color:#f1b84b}
 .muted{color:#7f91a5}
-
 .event{
- padding:6px 0;
- border-bottom:1px solid #172535;
- font-size:12px
+ padding:6px 0;border-bottom:1px solid #172535;font-size:12px
 }
-
 .diag{
  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
- font-size:11px;
- white-space:pre-wrap;
- word-break:break-word;
- background:#070d15;
- border-radius:8px;
- padding:9px;
- color:#b8c7d9
+ font-size:11px;white-space:pre-wrap;word-break:break-word;
+ background:#070d15;border-radius:8px;padding:9px;color:#b8c7d9
 }
-
 footer{
- text-align:center;
- color:#62758b;
- font-size:10px;
- padding:15px
+ text-align:center;color:#62758b;font-size:10px;padding:15px
 }
-
 @media(min-width:720px){
  .grid{grid-template-columns:repeat(4,1fr)}
  .wide{grid-column:span 2}
- .metricGrid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
@@ -159,10 +108,14 @@ footer{
   <span id="dot" class="dot"></span>
   <div>
    <h1>XT ETHUSDT Liquidity Map</h1>
-   <div class="sub">V1.5.4 • XT Futures / Research & Paper Trading</div>
+   <div class="sub">
+    V1.5.5 • XT Futures / Research & Paper Trading
+   </div>
   </div>
  </div>
- <div id="status" class="sub">Starting XT depth monitor…</div>
+ <div id="status" class="sub">
+  Starting XT depth monitor…
+ </div>
 </header>
 
 <main>
@@ -193,46 +146,77 @@ footer{
 
  </div>
 
- <div class="signalBox">
+ <div class="signal">
 
   <div class="k">LIQUIDITY & FLOW SIGNAL</div>
 
-  <div id="signal" class="signal none">
+  <div id="signal" class="signalMain signalNone">
    NO TRADE
   </div>
 
   <div id="signalReason" class="sub">
-   Waiting for enough market history…
-  </div>
-
-  <div class="metricGrid">
-
-   <div class="metric">
-    <div class="k">Liquidity Pressure</div>
-    <div id="pressure" class="value">—</div>
-   </div>
-
-   <div class="metric">
-    <div class="k">Price Velocity</div>
-    <div id="velocity" class="value">—</div>
-   </div>
-
-   <div class="metric">
-    <div class="k">Flow Burst</div>
-    <div id="burst" class="value">—</div>
-   </div>
-
-   <div class="metric">
-    <div class="k">Confidence</div>
-    <div id="confidence" class="value">—</div>
-   </div>
-
+   Waiting for confirmation…
   </div>
 
  </div>
 
 </section>
 
+<section class="card">
+
+ <div class="grid">
+
+  <div>
+   <div class="k">Liquidity Pressure</div>
+   <div id="pressure" class="v">—</div>
+  </div>
+
+  <div>
+   <div class="k">Price Velocity</div>
+   <div id="velocity" class="v">—</div>
+  </div>
+
+  <div>
+   <div class="k">Flow Burst</div>
+   <div id="burst" class="v">—</div>
+  </div>
+
+  <div>
+   <div class="k">Confidence</div>
+   <div id="confidence" class="v">—</div>
+  </div>
+
+ </div>
+
+</section>
+
+<section class="card">
+
+ <div class="grid">
+
+  <div>
+   <div class="k">LONG Score</div>
+   <div id="longScore" class="v">—</div>
+  </div>
+
+  <div>
+   <div class="k">SHORT Score</div>
+   <div id="shortScore" class="v">—</div>
+  </div>
+
+  <div>
+   <div class="k">Confirmations</div>
+   <div id="confirmations" class="v">0/3</div>
+  </div>
+
+  <div>
+   <div class="k">Signal Stability</div>
+   <div id="stability" class="v">—</div>
+  </div>
+
+ </div>
+
+</section>
 
 <section class="card">
 
@@ -247,67 +231,72 @@ footer{
 
 </section>
 
-
 <section class="card wide">
 
  <h3>Flow Analysis</h3>
 
- <div class="metricGrid">
+ <div class="grid">
 
-  <div class="metric">
+  <div>
    <div class="k">Bid Pressure</div>
-   <div id="bidPressure" class="value">—</div>
+   <div id="bidPressure" class="v">—</div>
   </div>
 
-  <div class="metric">
+  <div>
    <div class="k">Ask Pressure</div>
-   <div id="askPressure" class="value">—</div>
+   <div id="askPressure" class="v">—</div>
   </div>
 
-  <div class="metric">
+  <div>
    <div class="k">Added Levels</div>
-   <div id="added" class="value">—</div>
+   <div id="added" class="v">—</div>
   </div>
 
-  <div class="metric">
+  <div>
    <div class="k">Removed Levels</div>
-   <div id="removed" class="value">—</div>
+   <div id="removed" class="v">—</div>
   </div>
 
  </div>
 
 </section>
 
-
 <section class="card wide">
 
  <h3>Connection Diagnostics</h3>
- <div id="diag" class="diag">Initializing…</div>
+
+ <div id="diag" class="diag">
+ Initializing…
+ </div>
 
 </section>
-
 
 <section class="card wide">
 
  <h3>Liquidity Heatmap</h3>
- <div id="heatmap">Waiting for XT depth…</div>
+
+ <div id="heatmap">
+ Waiting for XT depth…
+ </div>
 
 </section>
-
 
 <section class="card wide">
 
  <h3>Order Book</h3>
- <div id="book">Waiting…</div>
+
+ <div id="book">
+ Waiting…
+ </div>
 
 </section>
-
 
 <section class="card wide">
 
  <h3>Liquidity Walls</h3>
 
  <table>
+
   <thead>
    <tr>
     <th>Price</th>
@@ -324,14 +313,15 @@ footer{
 
 </section>
 
-
 <section class="card">
 
  <h3>Alerts</h3>
- <div id="events" class="muted">No alerts yet.</div>
+
+ <div id="events" class="muted">
+  No alerts yet.
+ </div>
 
 </section>
-
 
 <section class="card">
 
@@ -379,14 +369,22 @@ footer{
 
 </section>
 
-
 <section class="card">
 
  <div class="muted">
-  V1.5.4: XT Connection Engine V4.5.1, multi-cycle liquidity pressure,
-  price velocity, filtered flow burst detection, wall proximity,
-  signal engine, confidence scoring, NO TRADE protection,
-  liquidity analysis and paper trading only.
+
+ V1.5.5: XT Connection Engine V4.5.1,
+ multi-cycle signal confirmation,
+ LONG/SHORT scoring,
+ liquidity pressure,
+ price velocity,
+ filtered flow burst,
+ wall proximity,
+ signal stability,
+ confidence engine,
+ NO TRADE protection,
+ diagnostics and paper trading only.
+
  </div>
 
 </section>
@@ -394,30 +392,23 @@ footer{
 </main>
 
 <footer>
- Real trading is disabled. Market monitoring and paper trading only.
+ Real trading is disabled.
+ Market monitoring and paper trading only.
 </footer>
-
 
 <script>
 'use strict';
 
-
-/* =========================================================
+/* =========================
    CONNECTION
-========================================================= */
+========================= */
 
-const XT_WORKER =
- 'https://xt-connection-engine-v4-5-1.ramin-ravangard64.workers.dev';
+const XT_ENGINE =
+'https://xt-connection-engine-v4-5-1.ramin-ravangard64.workers.dev';
 
 const SYMBOL='eth_usdt';
 
-
-/* =========================================================
-   DOM
-========================================================= */
-
 const el={
-
  dot:document.getElementById('dot'),
  status:document.getElementById('status'),
  diag:document.getElementById('diag'),
@@ -435,12 +426,16 @@ const el={
  burst:document.getElementById('burst'),
  confidence:document.getElementById('confidence'),
 
+ longScore:document.getElementById('longScore'),
+ shortScore:document.getElementById('shortScore'),
+ confirmations:document.getElementById('confirmations'),
+ stability:document.getElementById('stability'),
+
  bidPressure:document.getElementById('bidPressure'),
  askPressure:document.getElementById('askPressure'),
  added:document.getElementById('added'),
  removed:document.getElementById('removed'),
 
- levels:document.getElementById('levels'),
  heatmap:document.getElementById('heatmap'),
  book:document.getElementById('book'),
  walls:document.getElementById('walls'),
@@ -450,24 +445,23 @@ const el={
  pnl:document.getElementById('pnl'),
  trades:document.getElementById('trades'),
  position:document.getElementById('position'),
- qty:document.getElementById('qty')
 
+ qty:document.getElementById('qty'),
+ levels:document.getElementById('levels')
 };
 
-
-/* =========================================================
+/* =========================
    STATE
-========================================================= */
+========================= */
 
 let lastDepth=null;
-
 let historyData=[];
-
 let alertData=[];
-
 let busy=false;
 
-let previousSignal='NO TRADE';
+let signalHistory=[];
+let currentSignal='NO TRADE';
+let signalStreak=0;
 
 const paperState={
  balance:1000,
@@ -475,57 +469,42 @@ const paperState={
  trades:[]
 };
 
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
 const n=x=>Number(x)||0;
 
-const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-
-const fmtMoney=x=>
- Number(x||0).toLocaleString(undefined,{
-  maximumFractionDigits:0
- });
-
+/* =========================
+   STATUS
+========================= */
 
 function setStatus(t,live=false){
-
  el.status.textContent=t;
-
  el.dot.classList.toggle('live',live);
-
 }
-
 
 function diag(t){
-
  el.diag.textContent=t;
-
 }
 
-
-/* =========================================================
-   DEPTH PARSER
-========================================================= */
+/* =========================
+   PARSER
+========================= */
 
 function norm(rows){
 
  if(!Array.isArray(rows))return[];
 
- return rows
-  .map(x=>Array.isArray(x)
-   ?[n(x[0]),n(x[1])]
-   :[
-     n(x?.price),
-     n(x?.quantity??x?.qty??x?.amount)
-    ]
-  )
-  .filter(x=>x[0]>0&&x[1]>0);
+ return rows.map(x=>{
 
+  if(Array.isArray(x)){
+   return [n(x[0]),n(x[1])];
+  }
+
+  return [
+   n(x?.price),
+   n(x?.quantity??x?.qty??x?.amount)
+  ];
+
+ }).filter(x=>x[0]>0&&x[1]>0);
 }
-
 
 function parseDepth(payload){
 
@@ -534,11 +513,8 @@ function parseDepth(payload){
   payload?.data ??
   payload;
 
- const asks=
-  norm(root?.a ?? root?.asks);
-
- const bids=
-  norm(root?.b ?? root?.bids);
+ const asks=norm(root?.a??root?.asks);
+ const bids=norm(root?.b??root?.bids);
 
  if(!asks.length||!bids.length){
 
@@ -557,7 +533,6 @@ function parseDepth(payload){
   throw new Error(
    `No usable order book • bids=${bids.length} asks=${asks.length} returnCode=${rc} msg=${msg}`
   );
-
  }
 
  return{
@@ -565,118 +540,37 @@ function parseDepth(payload){
   bids,
   ts:Number(root?.t)||Date.now()
  };
-
 }
 
-
-/* =========================================================
+/* =========================
    ANALYSIS
-========================================================= */
+========================= */
 
 function analyze(book){
 
  book.asks.sort((a,b)=>a[0]-b[0]);
-
  book.bids.sort((a,b)=>b[0]-a[0]);
 
-
  const bid=book.bids[0]?.[0];
-
  const ask=book.asks[0]?.[0];
 
-
- if(!bid||!ask){
-
-  throw new Error('Empty depth');
-
- }
-
+ if(!bid||!ask)
+  throw new Error('empty depth');
 
  const mid=(bid+ask)/2;
-
  const spread=ask-bid;
 
-
- /* ---------------------------------------------
-    Top 10 pressure
- --------------------------------------------- */
-
  const bidPressure=
-  book.bids
-   .slice(0,10)
-   .reduce((s,x)=>s+x[0]*x[1],0);
+  book.bids.slice(0,10)
+  .reduce((s,x)=>s+x[0]*x[1],0);
 
  const askPressure=
-  book.asks
-   .slice(0,10)
-   .reduce((s,x)=>s+x[0]*x[1],0);
-
+  book.asks.slice(0,10)
+  .reduce((s,x)=>s+x[0]*x[1],0);
 
  const imbalance=
   (bidPressure-askPressure)/
   (bidPressure+askPressure||1);
-
-
- /* ---------------------------------------------
-    Liquidity changes
- --------------------------------------------- */
-
- let added=0;
-
- let removed=0;
-
- let addedBid=0;
-
- let addedAsk=0;
-
- let removedBid=0;
-
- let removedAsk=0;
-
-
- if(lastDepth){
-
-  for(const side of ['bids','asks']){
-
-   const prev=
-    new Map(
-     lastDepth[side].map(x=>[x[0],x[1]])
-    );
-
-   for(const [p,q] of book[side]){
-
-    const old=prev.get(p)||0;
-
-    if(!old)continue;
-
-    if(q>old*1.5){
-
-     added++;
-
-     if(side==='bids')addedBid++;
-     else addedAsk++;
-
-    }
-
-    if(q<old*.5){
-
-     removed++;
-
-     if(side==='bids')removedBid++;
-     else removedAsk++;
-
-    }
-
-   }
-
-  }
-
- }
-
-
- /* ---------------------------------------------
-    Wall calculation
- --------------------------------------------- */
 
  const values=[
   ...book.bids,
@@ -685,10 +579,8 @@ function analyze(book){
  .map(x=>x[0]*x[1])
  .sort((a,b)=>a-b);
 
-
  const med=
   values[Math.floor(values.length/2)]||1;
-
 
  const walls=[
 
@@ -706,371 +598,258 @@ function analyze(book){
 
  ]
  .filter(x=>x.price*x.qty>=med*4)
-
  .map(x=>({
 
   price:x.price,
-
-  qty:x.qty,
-
   side:x.side,
-
   notional:x.price*x.qty,
-
-  strength:(x.price*x.qty)/med,
-
-  distance:
-   Math.abs(x.price-mid)/mid
+  strength:x.price*x.qty/med,
+  distance:Math.abs(x.price-mid)/mid*100
 
  }))
-
  .sort((a,b)=>b.strength-a.strength)
-
  .slice(0,20);
 
+ let removed=0;
+ let added=0;
 
- /* ---------------------------------------------
-    Velocity
- --------------------------------------------- */
+ if(lastDepth){
+
+  for(const side of ['bids','asks']){
+
+   const prev=
+    new Map(
+     lastDepth[side].map(x=>[x[0],x[1]])
+    );
+
+   for(const [p,q] of book[side]){
+
+    const old=prev.get(p)||0;
+
+    if(old&&q<old*.5)
+     removed++;
+
+    if(old&&q>old*1.5)
+     added++;
+
+   }
+  }
+ }
 
  let velocity=0;
 
- let velocityPct=0;
-
- let priceDelta=0;
-
-
  if(historyData.length){
 
-  const prev=
-   historyData[historyData.length-1];
+  const previous=
+   historyData.at(-1).mid;
 
-  if(prev?.mid){
-
-   priceDelta=mid-prev.mid;
-
-   velocityPct=
-    priceDelta/prev.mid*100;
-
+  if(previous)
    velocity=
-    priceDelta;
+    ((mid-previous)/previous)*10000;
+ }
 
-  }
+ const pressure=
+  imbalance*.55+
+  ((added-removed)*.02);
+
+ const burstRaw=
+  Math.abs(pressure)*.8+
+  Math.min(1,Math.abs(velocity)/5)*.2;
+
+ const burst=
+  Math.max(0,Math.min(1,burstRaw));
+
+ return{
+  ...book,
+  mid,
+  spread,
+  bidPressure,
+  askPressure,
+  imbalance,
+  walls,
+  added,
+  removed,
+  velocity,
+  pressure,
+  burst
+ };
+}
+
+/* =========================
+   SIGNAL ENGINE
+========================= */
+
+function calculateSignal(d){
+
+ let long=0;
+ let short=0;
+
+ const reasons=[];
+
+ /* imbalance */
+
+ if(d.imbalance>.20)
+  long+=20;
+
+ if(d.imbalance<-.20)
+  short+=20;
+
+ /* pressure */
+
+ if(d.pressure>.12)
+  long+=20;
+
+ if(d.pressure<-.12)
+  short+=20;
+
+ /* velocity */
+
+ if(d.velocity>.25)
+  long+=15;
+
+ if(d.velocity<-.25)
+  short+=15;
+
+ /* flow burst */
+
+ if(d.burst>.45){
+
+  if(d.pressure>0)
+   long+=15;
+
+  if(d.pressure<0)
+   short+=15;
 
  }
 
+ /* liquidity changes */
 
- /* ---------------------------------------------
-    Multi-cycle pressure
- --------------------------------------------- */
+ if(d.added>d.removed+2){
 
- let pressureBase=imbalance;
+  if(d.pressure>0)
+   long+=10;
 
- let trendPressure=0;
-
- if(historyData.length>=3){
-
-  const recent=
-   historyData.slice(-3);
-
-  const avg=
-   recent.reduce(
-    (s,x)=>s+n(x.imbalance),0
-   )/recent.length;
-
-  trendPressure=
-   clamp(avg,-1,1);
+  if(d.pressure<0)
+   short+=5;
 
  }
 
+ if(d.removed>d.added+2){
 
- let pressure=
-  clamp(
-   pressureBase*.65+
-   trendPressure*.25+
-   clamp((addedBid-addedAsk)*.03,-.3,.3)+
-   clamp((removedAsk-removedBid)*.03,-.3,.3),
-   -1,
-   1
+  if(d.pressure<0)
+   short+=10;
+
+  if(d.pressure>0)
+   long+=5;
+
+ }
+
+ /* wall proximity */
+
+ const nearBid=
+  d.walls.some(
+   w=>w.side==='bid'&&w.distance<.015
   );
 
+ const nearAsk=
+  d.walls.some(
+   w=>w.side==='ask'&&w.distance<.015
+  );
 
- /* ---------------------------------------------
-    Flow burst
- --------------------------------------------- */
+ if(nearBid&&d.pressure>0)
+  long+=10;
 
- let burstScore=0;
+ if(nearAsk&&d.pressure<0)
+  short+=10;
 
- const changeMagnitude=
-  added+removed;
+ const total=
+  Math.max(long,short);
 
- if(changeMagnitude>=3){
+ let confidence=
+  Math.round(
+   Math.min(100,total)
+  );
 
-  burstScore+=
-   clamp(changeMagnitude/12,0,.45);
+ let rawSignal='NO TRADE';
 
- }
+ if(long>=short+10&&long>=40)
+  rawSignal='WATCH LONG';
 
- if(Math.abs(velocityPct)>=.005){
+ else if(short>=long+10&&short>=40)
+  rawSignal='WATCH SHORT';
 
-  burstScore+=
-   clamp(Math.abs(velocityPct)/.03,.0,.35);
+ /* confirmation */
 
- }
+ signalHistory.push({
+  signal:rawSignal,
+  long,
+  short,
+  ts:Date.now()
+ });
 
- if(Math.abs(imbalance)>=.35){
+ if(signalHistory.length>8)
+  signalHistory.shift();
 
-  burstScore+=
-   clamp(Math.abs(imbalance)/1*.25,0,.25);
+ const recent=
+  signalHistory.slice(-3);
 
- }
-
- burstScore=clamp(burstScore,0,1);
-
-
- let burstState='INACTIVE';
-
- if(burstScore>=.65)
-  burstState='STRONG';
-
- else if(burstScore>=.35)
-  burstState='ACTIVE';
-
- else if(burstScore>=.18)
-  burstState='WATCH';
-
-
- /* ---------------------------------------------
-    Direction
- --------------------------------------------- */
-
- let direction='NONE';
+ let confirmedCount=0;
 
  if(
-  pressure>.18 &&
-  imbalance>.12
+  recent.length===3 &&
+  recent.every(x=>x.signal===rawSignal) &&
+  rawSignal!=='NO TRADE'
  ){
+  confirmedCount=3;
+ }
 
-  direction='LONG';
+ let finalSignal=rawSignal;
 
+ if(
+  rawSignal==='WATCH LONG' &&
+  confirmedCount===3 &&
+  confidence>=60
+ ){
+  finalSignal='CONFIRMED LONG';
  }
 
  else if(
-  pressure<-.18 &&
-  imbalance<-.12
+  rawSignal==='WATCH SHORT' &&
+  confirmedCount===3 &&
+  confidence>=60
  ){
-
-  direction='SHORT';
-
+  finalSignal='CONFIRMED SHORT';
  }
 
-
- /* ---------------------------------------------
-    Wall confirmation
- --------------------------------------------- */
-
- let nearBid=null;
-
- let nearAsk=null;
-
- for(const w of walls){
-
-  if(w.side==='bid' && !nearBid)
-   nearBid=w;
-
-  if(w.side==='ask' && !nearAsk)
-   nearAsk=w;
-
- }
-
-
- let wallBias=0;
-
-
- if(nearBid&&nearAsk){
-
-  if(
-   nearBid.strength>
-   nearAsk.strength*1.25
-  )
-   wallBias=.15;
-
-  if(
-   nearAsk.strength>
-   nearBid.strength*1.25
-  )
-   wallBias=-.15;
-
- }
-
-
- /* ---------------------------------------------
-    Confidence
- --------------------------------------------- */
-
- let confidence=0;
-
- confidence+=
-  Math.abs(imbalance)*35;
-
- confidence+=
-  Math.abs(pressure)*30;
-
- confidence+=
-  burstScore*20;
-
- confidence+=
-  Math.abs(velocityPct)>=.003?10:0;
-
- confidence+=
-  Math.abs(wallBias)*20;
-
- confidence=
-  Math.round(
-   clamp(confidence,0,100)
-  );
-
-
- /* ---------------------------------------------
-    Signal Engine
- --------------------------------------------- */
-
- let signal='NO TRADE';
-
- let reason='Conditions not sufficiently confirmed.';
-
-
- const strongPressure=
-  Math.abs(pressure)>=.35;
-
- const strongImbalance=
-  Math.abs(imbalance)>=.35;
-
- const usefulBurst=
-  burstScore>=.35;
-
-
- if(
-  direction==='LONG' &&
-  strongPressure &&
-  strongImbalance &&
-  usefulBurst &&
-  velocity>=0
+ else if(
+  confidence<45
  ){
-
-  signal=
-   confidence>=70
-   ?'LONG SETUP'
-   :'WATCH LONG';
-
-  reason=
-   'Bid pressure + imbalance + flow conditions support upside.';
-
+  finalSignal='NO TRADE';
  }
 
-
- if(
-  direction==='SHORT' &&
-  strongPressure &&
-  strongImbalance &&
-  usefulBurst &&
-  velocity<=0
- ){
-
-  signal=
-   confidence>=70
-   ?'SHORT SETUP'
-   :'WATCH SHORT';
-
-  reason=
-   'Ask pressure + imbalance + flow conditions support downside.';
-
+ if(finalSignal===currentSignal)
+  signalStreak++;
+ else{
+  currentSignal=finalSignal;
+  signalStreak=1;
  }
-
-
- /* ---------------------------------------------
-    Safety filter
- --------------------------------------------- */
-
- if(confidence<40){
-
-  signal='NO TRADE';
-
-  reason='Confidence below minimum threshold.';
-
- }
-
-
- if(
-  burstState==='INACTIVE' &&
-  signal!=='NO TRADE'
- ){
-
-  signal='NO TRADE';
-
-  reason='Flow confirmation is insufficient.';
-
- }
-
 
  return{
-
-  ...book,
-
-  mid,
-
-  spread,
-
-  imbalance,
-
-  bidPressure,
-
-  askPressure,
-
-  added,
-
-  removed,
-
-  addedBid,
-
-  addedAsk,
-
-  removedBid,
-
-  removedAsk,
-
-  walls,
-
-  velocity,
-
-  velocityPct,
-
-  priceDelta,
-
-  pressure,
-
-  burstScore,
-
-  burstState,
-
-  direction,
-
-  wallBias,
-
+  long,
+  short,
   confidence,
-
-  signal,
-
-  reason
-
+  rawSignal,
+  finalSignal,
+  confirmedCount,
+  streak:signalStreak,
+  nearBid,
+  nearAsk
  };
-
 }
 
-
-/* =========================================================
+/* =========================
    RENDER
-========================================================= */
+========================= */
 
 function maxQty(d){
 
@@ -1084,143 +863,133 @@ function maxQty(d){
 
 }
 
+function render(d,s){
 
-function render(d){
-
- el.mid.textContent=
-  d.mid.toFixed(2);
-
- el.spread.textContent=
-  d.spread.toFixed(3);
-
- el.imb.textContent=
-  d.imbalance.toFixed(3);
+ el.mid.textContent=d.mid.toFixed(2);
+ el.spread.textContent=d.spread.toFixed(3);
+ el.imb.textContent=d.imbalance.toFixed(3);
 
  el.regime.textContent=
-  d.pressure>.18
-  ?'BULLISH'
-  :d.pressure<-.18
-  ?'BEARISH'
-  :'NEUTRAL';
-
+  d.pressure>.12
+   ?'BULLISH'
+   :d.pressure<-.12
+    ?'BEARISH'
+    :'NEUTRAL';
 
  el.regime.className=
   'v '+
   (
-   d.pressure>.18
-   ?'good'
-   :d.pressure<-.18
-   ?'bad'
-   :''
+   d.pressure>.12
+    ?'good'
+    :d.pressure<-.12
+     ?'bad'
+     :''
   );
-
-
- /* Signal */
-
- el.signal.textContent=
-  d.signal;
-
- el.signalReason.textContent=
-  d.reason;
-
- el.signal.className=
-  'signal '+
-  (
-   d.signal.includes('LONG')
-   ?'long'
-   :d.signal.includes('SHORT')
-   ?'short'
-   :d.signal==='NO TRADE'
-   ?'none'
-   :'watch'
-  );
-
-
- /* Metrics */
 
  el.pressure.textContent=
   d.pressure.toFixed(3);
 
- el.pressure.className=
-  'value '+
-  (
-   d.pressure>0
-   ?'good'
-   :d.pressure<0
-   ?'bad'
-   :''
-  );
-
-
  el.velocity.textContent=
   d.velocity.toFixed(4);
 
-
  el.burst.textContent=
-  d.burstState+
-  ' '+Math.round(d.burstScore*100)+'%';
-
+  d.burst>=.45
+   ?'ACTIVE '+Math.round(d.burst*100)+'%'
+   :'LOW '+Math.round(d.burst*100)+'%';
 
  el.confidence.textContent=
-  d.confidence+'%';
+  s.confidence+'%';
 
+ el.longScore.textContent=
+  s.long+'/100';
+
+ el.shortScore.textContent=
+  s.short+'/100';
+
+ el.confirmations.textContent=
+  s.confirmedCount+'/3';
+
+ el.stability.textContent=
+  s.streak+' cycle'+
+  (s.streak===1?'':'s');
 
  el.bidPressure.textContent=
-  fmtMoney(d.bidPressure);
+  Math.round(d.bidPressure).toLocaleString();
 
  el.askPressure.textContent=
-  fmtMoney(d.askPressure);
+  Math.round(d.askPressure).toLocaleString();
 
- el.added.textContent=
-  d.added;
+ el.added.textContent=d.added;
+ el.removed.textContent=d.removed;
 
- el.removed.textContent=
-  d.removed;
+ /* signal */
 
+ el.signal.textContent=s.finalSignal;
 
- /* Walls */
+ el.signal.className=
+  'signalMain '+
+  (
+   s.finalSignal.includes('LONG')
+    ?'signalLong'
+    :s.finalSignal.includes('SHORT')
+     ?'signalShort'
+     :s.finalSignal==='NO TRADE'
+      ?'signalNone'
+      :'signalWatch'
+  );
+
+ let reason='';
+
+ if(s.finalSignal==='NO TRADE')
+  reason=
+   'NO TRADE protection active. Waiting for stronger confirmation.';
+
+ else if(s.finalSignal==='WATCH LONG')
+  reason=
+   'Long bias detected, but confirmation is incomplete.';
+
+ else if(s.finalSignal==='WATCH SHORT')
+  reason=
+   'Short bias detected, but confirmation is incomplete.';
+
+ else if(s.finalSignal==='CONFIRMED LONG')
+  reason=
+   'Long signal confirmed across 3 consecutive cycles.';
+
+ else if(s.finalSignal==='CONFIRMED SHORT')
+  reason=
+   'Short signal confirmed across 3 consecutive cycles.';
+
+ el.signalReason.textContent=
+  reason+
+  ` Confidence ${s.confidence}%`;
+
+ /* walls */
 
  el.walls.innerHTML=
   d.walls.map(w=>`
 
    <tr>
-
     <td>${w.price.toFixed(2)}</td>
-
-    <td class="${w.side==='bid'?'good':'bad'}">
-     ${w.side}
-    </td>
-
-    <td>${fmtMoney(w.notional)}</td>
-
+    <td>${w.side}</td>
+    <td>${Math.round(w.notional).toLocaleString()}</td>
     <td>${w.strength.toFixed(1)}x</td>
-
-    <td>
-     ${(w.distance*100).toFixed(3)}%
-    </td>
-
+    <td>${w.distance.toFixed(3)}%</td>
    </tr>
 
-  `).join('')
-
-  ||
+  `).join('') ||
 
   '<tr><td colspan="5" class="muted">No large walls</td></tr>';
 
-
- /* Heatmap */
+ /* heatmap */
 
  const mq=maxQty(d);
 
  const a=
-  d.asks
-   .slice(0,25)
-   .reverse();
+  d.asks.slice(0,25).reverse();
 
  const b=
-  d.bids
-   .slice(0,25);
-
+  d.bids.slice(0,25);
 
  el.heatmap.innerHTML=
 
@@ -1230,10 +999,7 @@ function render(d){
 
     <div
      class="la"
-     style="width:${Math.min(
-      100,
-      x[1]/mq*100
-     )}%"
+     style="width:${Math.min(100,x[1]/mq*100)}%"
     ></div>
 
     <span class="price">
@@ -1244,27 +1010,17 @@ function render(d){
 
    </div>
 
-  `).join('')
-
-  +
+  `).join('')+
 
   `
-
    <div class="level">
-
     <span></span>
-
     <span class="price">
      ${d.mid.toFixed(2)}
     </span>
-
     <span></span>
-
    </div>
-
-  `
-
-  +
+  `+
 
   b.map(x=>`
 
@@ -1278,156 +1034,120 @@ function render(d){
 
     <div
      class="lb"
-     style="width:${Math.min(
-      100,
-      x[1]/mq*100
-     )}%"
+     style="width:${Math.min(100,x[1]/mq*100)}%"
     ></div>
 
    </div>
 
   `).join('');
 
-
- /* Order Book */
+ /* order book */
 
  el.book.innerHTML=[
 
   ...a.slice(-10).map(x=>`
-
    <div class="side ask">
-
-    ${x[0].toFixed(2)}
-    ×
-    ${x[1].toFixed(4)}
-
+    ${x[0].toFixed(2)} × ${x[1].toFixed(4)}
    </div>
-
   `),
 
-  `
-   <div class="side price">
-    MID ${d.mid.toFixed(2)}
-   </div>
-  `,
+  `<div class="side price">
+   MID ${d.mid.toFixed(2)}
+  </div>`,
 
   ...b.slice(0,10).map(x=>`
-
    <div class="side bid">
-
-    ${x[0].toFixed(2)}
-    ×
-    ${x[1].toFixed(4)}
-
+    ${x[0].toFixed(2)} × ${x[1].toFixed(4)}
    </div>
-
   `)
 
  ].join('');
-
 }
 
-
-/* =========================================================
+/* =========================
    ALERTS
-========================================================= */
+========================= */
 
 function alertPush(type,msg){
 
- const key=
-  type+'|'+msg;
+ const key=type+'|'+msg;
 
- if(
-  alertData[0]?.key===key
- )
+ if(alertData[0]?.key===key)
   return;
 
-
  alertData.unshift({
-
   key,
   type,
   msg,
   ts:Date.now()
-
  });
-
 
  alertData=
   alertData.slice(0,30);
-
 
  el.events.innerHTML=
   alertData.map(x=>`
 
    <div class="event">
-
     ${new Date(x.ts).toLocaleTimeString()}
-    —
-    <b>${x.type}</b>
-    ${x.msg}
-
+    — <b>${x.type}</b> ${x.msg}
    </div>
 
   `).join('');
-
 }
 
+/* =========================
+   FETCH
+========================= */
 
-/* =========================================================
-   NETWORK
-========================================================= */
+async function fetchWithTimeout(url,ms){
 
-function fetchWithTimeout(url,ms){
+ const c=new AbortController();
 
- const c=
-  new AbortController();
-
- const t=
-  setTimeout(
-   ()=>c.abort(),
-   ms
-  );
-
- return fetch(url,{
-
-  method:'GET',
-
-  cache:'no-store',
-
-  headers:{
-   Accept:'application/json'
-  },
-
-  signal:c.signal
-
- }).finally(
-  ()=>clearTimeout(t)
+ const t=setTimeout(
+  ()=>c.abort(),
+  ms
  );
 
+ try{
+
+  return await fetch(
+   url,
+   {
+    method:'GET',
+    cache:'no-store',
+    headers:{
+     Accept:'application/json'
+    },
+    signal:c.signal
+   }
+  );
+
+ }finally{
+
+  clearTimeout(t);
+
+ }
+
 }
 
+async function fetchEngine(level){
 
-async function fetchWorker(lv){
-
- const stamp=
-  Date.now();
+ const stamp=Date.now();
 
  const url=
-  `${XT_WORKER}/api/depth`+
+  `${XT_ENGINE}/api/depth`+
   `?symbol=${encodeURIComponent(SYMBOL)}`+
-  `&level=${lv}`+
+  `&level=${level}`+
   `&_=${stamp}`;
 
+ const started=performance.now();
 
- const started=
-  performance.now();
-
-
- diag(`V1.5.4 CONNECTION ENGINE
+ diag(`
+V1.5.5 CONNECTION ENGINE
 
 Worker:
-${XT_WORKER}
+${XT_ENGINE}
 
 Endpoint:
 /api/depth
@@ -1436,41 +1156,27 @@ Symbol:
 ${SYMBOL}
 
 Level:
-${lv}
+${level}
 
-Connecting…`);
-
+Connecting…
+`);
 
  const res=
   await fetchWithTimeout(
    url,
-   9000
+   8000
   );
-
 
  const text=
   await res.text();
-
 
  const latency=
   Math.round(
    performance.now()-started
   );
 
-
- diag(`V1.5.4 CONNECTION ENGINE
-
-Worker:
-${XT_WORKER}
-
-Endpoint:
-/api/depth
-
-Symbol:
-${SYMBOL}
-
-Level:
-${lv}
+ diag(`
+V1.5.5 CONNECTION ENGINE
 
 HTTP:
 ${res.status} ${res.statusText}
@@ -1482,17 +1188,15 @@ Latency:
 ${latency} ms
 
 Response:
-${text.slice(0,1800)}`);
-
+${text.slice(0,1800)}
+`);
 
  if(!res.ok)
   throw new Error(
-   `WORKER HTTP ${res.status}`
+   `ENGINE HTTP ${res.status}`
   );
 
-
  let payload;
-
 
  try{
 
@@ -1502,31 +1206,26 @@ ${text.slice(0,1800)}`);
  }catch{
 
   throw new Error(
-   'Worker returned non-JSON data'
+   'ENGINE returned non-JSON data'
   );
 
  }
 
-
  return analyze(
   parseDepth(payload)
  );
-
 }
 
-
-/* =========================================================
+/* =========================
    REFRESH
-========================================================= */
+========================= */
 
 async function refreshDepth(){
 
  if(busy)
   return;
 
-
  busy=true;
-
 
  const lv=
   Math.min(
@@ -1537,43 +1236,43 @@ async function refreshDepth(){
    )
   );
 
-
  setStatus(
   'Connecting to XT through V4.5.1…',
   false
  );
 
-
  try{
 
   const d=
-   await fetchWorker(lv);
+   await fetchEngine(lv);
 
+  /*
+   Important:
+   analyze uses previous history
+   for velocity, so render before
+   pushing current cycle.
+  */
 
-  /* Keep previous state only after successful fetch */
+  const s=
+   calculateSignal(d);
 
   lastDepth={
    asks:d.asks,
    bids:d.bids
   };
 
-
   historyData.push(d);
 
-
-  if(historyData.length>120)
+  if(historyData.length>300)
    historyData.shift();
 
-
-  render(d);
-
+  render(d,s);
 
   setStatus(
    'XT LIVE • '+
    new Date().toLocaleTimeString(),
    true
   );
-
 
   diag(
    el.diag.textContent+
@@ -1588,124 +1287,78 @@ Spread: ${d.spread.toFixed(3)}
 Imbalance: ${d.imbalance.toFixed(3)}
 Pressure: ${d.pressure.toFixed(3)}
 Velocity: ${d.velocity.toFixed(4)}
-Burst: ${d.burstState}
-Confidence: ${d.confidence}%
-Signal: ${d.signal}`
+Burst: ${d.burst.toFixed(2)}
+Signal: ${s.finalSignal}
+Confidence: ${s.confidence}%
+Confirmation: ${s.confirmedCount}/3`
   );
 
+  /* alerts */
 
-  /* Alerts */
-
-  if(
-   Math.abs(d.imbalance)>=.65
-  ){
-
+  if(Math.abs(d.imbalance)>=.65)
    alertPush(
     'Imbalance',
     'Top-10 imbalance '+
     d.imbalance.toFixed(2)
    );
 
-  }
-
-
-  if(
-   d.walls.length
-  ){
-
-   const w=
-    d.walls[0];
-
+  if(d.walls.length)
    alertPush(
     'Wall',
     'Large '+
-    w.side+
+    d.walls[0].side+
     ' wall near '+
-    w.price.toFixed(2)
+    d.walls[0].price.toFixed(2)
    );
 
-  }
-
-
-  if(d.added>=5){
-
-   alertPush(
-    'Liquidity added',
-    d.added+
-    ' levels increased sharply'
-   );
-
-  }
-
-
-  if(d.removed>=5){
-
+  if(d.removed>=3)
    alertPush(
     'Liquidity removal',
     d.removed+
     ' levels changed sharply'
    );
 
-  }
-
+  if(d.added>=3)
+   alertPush(
+    'Liquidity added',
+    d.added+
+    ' levels increased sharply'
+   );
 
   if(
-   d.burstState==='STRONG'
+   s.finalSignal==='CONFIRMED LONG'||
+   s.finalSignal==='CONFIRMED SHORT'
   ){
 
    alertPush(
-    'Flow burst',
-    'Strong order-book flow burst detected'
+    'CONFIRMED SIGNAL',
+    s.finalSignal+
+    ' • confidence '+
+    s.confidence+'%'
    );
 
   }
-
-
-  if(
-   d.signal!==previousSignal
-  ){
-
-   alertPush(
-    'Signal',
-    previousSignal+
-    ' → '+
-    d.signal
-   );
-
-   previousSignal=
-    d.signal;
-
-  }
-
 
  }catch(err){
 
-  el.dot.classList.remove(
-   'live'
-  );
-
+  el.dot.classList.remove('live');
 
   const msg=
    err?.message||
    String(err);
 
-
   const friendly=
    err?.name==='AbortError'
-   ?'Worker request timed out'
-   :(msg.includes('Failed to fetch')||
-     msg.includes('NetworkError')
-    ?'Worker blocked by browser/network'
-    :'XT connection failed');
-
+    ?'Connection timed out'
+    :(msg.includes('Failed to fetch')||
+      msg.includes('NetworkError')
+       ?'Worker blocked by browser/network'
+       :'XT engine connection failed');
 
   setStatus(
-   friendly+
-   ' • '+
-   msg,
+   friendly+' • '+msg,
    false
   );
-
 
   diag(
    el.diag.textContent+
@@ -1714,13 +1367,8 @@ Signal: ${d.signal}`
 FINAL FAILURE:
 ${msg}
 
-The current Worker:
-${XT_WORKER}
-
-If this error repeats, open the Worker
-/api/depth URL directly in Chrome.`
+Open the Engine /api/depth endpoint directly in Chrome if needed.`
   );
-
 
  }finally{
 
@@ -1732,10 +1380,9 @@ If this error repeats, open the Worker
 
 }
 
-
-/* =========================================================
+/* =========================
    PAPER TRADING
-========================================================= */
+========================= */
 
 function paperTrade(side){
 
@@ -1744,66 +1391,61 @@ function paperTrade(side){
    'XT depth is not connected yet'
   );
 
-
  if(!historyData.length)
   return alert(
    'No live price'
   );
-
 
  if(paperState.position)
   return alert(
    'Position already open'
   );
 
+ /*
+  Safety:
+  Paper trading remains manual.
+  Confirmed signals do NOT automatically
+  create a position in V1.5.5.
+ */
 
  const price=
   historyData.at(-1).mid;
 
-
  const q=
   n(el.qty.value);
 
-
  const margin=
   price*q;
-
 
  if(q<=0)
   return alert(
    'Invalid quantity'
   );
 
-
- if(margin>
-    paperState.balance)
+ if(margin>paperState.balance)
   return alert(
    'Insufficient paper balance'
   );
 
-
- paperState.balance-=
-  margin;
-
+ paperState.balance-=margin;
 
  paperState.position={
-
   side,
   qty:q,
   entry:price,
   margin
-
  };
-
 
  renderPaper();
 
+ alertPush(
+  'Paper trade',
+  side.toUpperCase()+
+  ' opened @ '+
+  price.toFixed(2)
+ );
+
 }
-
-
-/* =========================================================
-   CLOSE PAPER POSITION
-========================================================= */
 
 function closePaper(){
 
@@ -1813,20 +1455,16 @@ function closePaper(){
  )
   return;
 
-
  const p=
   paperState.position;
-
 
  const price=
   historyData.at(-1).mid;
 
-
  const dir=
   p.side==='long'
-  ?1
-  :-1;
-
+   ?1
+   :-1;
 
  const pnl=
   (price-p.entry)*
@@ -1834,37 +1472,31 @@ function closePaper(){
   dir
   -
   (price*p.qty+
-   p.entry*p.qty)*
-   .0005;
-
+   p.entry*p.qty)*.0005;
 
  paperState.balance+=
   p.margin+pnl;
-
 
  paperState.trades.push({
   pnl
  });
 
-
- paperState.position=
-  null;
-
+ paperState.position=null;
 
  renderPaper();
 
+ alertPush(
+  'Paper trade',
+  'Position closed • PnL '+
+  pnl.toFixed(2)
+ );
+
 }
-
-
-/* =========================================================
-   PAPER UI
-========================================================= */
 
 function renderPaper(){
 
  el.balance.textContent=
   paperState.balance.toFixed(2);
-
 
  el.pnl.textContent=
   paperState.trades
@@ -1874,32 +1506,21 @@ function renderPaper(){
    )
    .toFixed(2);
 
-
  el.trades.textContent=
   paperState.trades.length;
 
-
  el.position.textContent=
   paperState.position
-
-  ?
-
-  paperState.position.side
-   .toUpperCase()+
-  ' @ '+
-  paperState.position.entry
-   .toFixed(2)
-
-  :
-
-  'None';
+   ?paperState.position.side.toUpperCase()+
+    ' @ '+
+    paperState.position.entry.toFixed(2)
+   :'None';
 
 }
 
-
-/* =========================================================
+/* =========================
    EVENTS
-========================================================= */
+========================= */
 
 document
  .getElementById('refreshBtn')
@@ -1908,14 +1529,12 @@ document
   refreshDepth
  );
 
-
 document
  .getElementById('longBtn')
  .addEventListener(
   'click',
   ()=>paperTrade('long')
  );
-
 
 document
  .getElementById('shortBtn')
@@ -1924,7 +1543,6 @@ document
   ()=>paperTrade('short')
  );
 
-
 document
  .getElementById('closeBtn')
  .addEventListener(
@@ -1932,16 +1550,14 @@ document
   closePaper
  );
 
-
 el.levels.addEventListener(
  'change',
  refreshDepth
  );
 
-
-/* =========================================================
+/* =========================
    START
-========================================================= */
+========================= */
 
 renderPaper();
 
@@ -1955,4 +1571,4 @@ setInterval(
 </script>
 
 </body>
- </html>
+    </html>
