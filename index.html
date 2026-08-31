@@ -4,99 +4,266 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07101d">
-<title>XT ETHUSDT Liquidity Map V1.5.5</title>
+<title>XT ETHUSDT Liquidity Map V1.5.6</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
- margin:0;background:#060b12;color:#e8eef7;
+ margin:0;
+ background:#060b12;
+ color:#e8eef7;
  font:14px system-ui,-apple-system,Segoe UI,Roboto,sans-serif
 }
+
 header{
- position:sticky;top:0;z-index:5;background:#08111d;
- border-bottom:1px solid #1c2a3a;padding:12px 14px
+ position:sticky;
+ top:0;
+ z-index:5;
+ background:#08111d;
+ border-bottom:1px solid #1c2a3a;
+ padding:12px 14px
 }
+
 h1{font-size:17px;margin:0}
-.sub{font-size:11px;color:#8496aa;margin-top:3px}
-main{padding:10px;max-width:900px;margin:auto}
+h3{margin-top:0}
+
+.sub{
+ font-size:11px;
+ color:#8496aa;
+ margin-top:3px
+}
+
+main{
+ padding:10px;
+ max-width:900px;
+ margin:auto
+}
+
 .grid{
- display:grid;grid-template-columns:repeat(2,1fr);gap:8px
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:8px
 }
+
 .card{
- background:#0b1420;border:1px solid #1b2a3b;
- border-radius:12px;padding:11px;margin-bottom:9px
+ background:#0b1420;
+ border:1px solid #1b2a3b;
+ border-radius:12px;
+ padding:11px;
+ margin-bottom:9px
 }
-.k{font-size:11px;color:#8294a8}
-.v{font-size:18px;font-weight:700;margin-top:3px}
-.status{display:flex;align-items:center;gap:7px}
+
+.k{
+ font-size:11px;
+ color:#8294a8
+}
+
+.v{
+ font-size:18px;
+ font-weight:700;
+ margin-top:3px
+}
+
+.status{
+ display:flex;
+ align-items:center;
+ gap:7px
+}
+
 .dot{
- width:8px;height:8px;border-radius:50%;background:#f1b84b
+ width:8px;
+ height:8px;
+ border-radius:50%;
+ background:#f1b84b
 }
+
 .live{background:#4de18b}
+
 button{
- border:1px solid #2b4057;background:#101c2b;color:#eef5ff;
- padding:9px 11px;border-radius:8px;font-weight:600
+ border:1px solid #2b4057;
+ background:#101c2b;
+ color:#eef5ff;
+ padding:9px 11px;
+ border-radius:8px;
+ font-weight:600
 }
-button:active{transform:scale(.98)}
+
+button:active{
+ transform:scale(.98)
+}
+
 select,input{
- width:100%;background:#0a1421;color:#fff;
- border:1px solid #2b4057;border-radius:7px;padding:8px
+ width:100%;
+ background:#0a1421;
+ color:#fff;
+ border:1px solid #2b4057;
+ border-radius:7px;
+ padding:8px
 }
-.row{display:flex;gap:7px;align-items:center}
+
+.row{
+ display:flex;
+ gap:7px;
+ align-items:center
+}
+
 .row>*{flex:1}
+
 .signal{
- border:1px solid #2b4057;border-radius:10px;
- padding:12px;background:#08111d;margin-top:8px
+ border:1px solid #2b4057;
+ border-radius:10px;
+ padding:12px;
+ background:#08111d;
+ margin-top:8px
 }
+
 .signalMain{
- font-size:21px;font-weight:800;letter-spacing:.5px
+ font-size:21px;
+ font-weight:800;
+ letter-spacing:.5px
 }
+
 .signalLong{color:#52e495}
 .signalShort{color:#ff7183}
 .signalWatch{color:#f1b84b}
 .signalNone{color:#8294a8}
+
+.explosive{
+ border:1px solid #3a4255;
+ border-radius:10px;
+ padding:12px;
+ background:#080f19;
+ margin-top:8px
+}
+
+.explosiveTitle{
+ font-size:11px;
+ color:#8294a8
+}
+
+.explosiveMain{
+ font-size:20px;
+ font-weight:800;
+ margin-top:3px
+}
+
+.shock{
+ color:#ffb84d
+}
+
+.shockLong{
+ color:#52e495
+}
+
+.shockShort{
+ color:#ff7183
+}
+
 #book{
- display:grid;grid-template-columns:1fr 1fr;gap:6px
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:6px
 }
-.side{padding:4px;border-radius:5px;background:#101b28}
-.bid{border-left:3px solid #3ed58a}
-.ask{border-left:3px solid #ef6378}
+
+.side{
+ padding:4px;
+ border-radius:5px;
+ background:#101b28
+}
+
+.bid{
+ border-left:3px solid #3ed58a
+}
+
+.ask{
+ border-left:3px solid #ef6378
+}
+
 #heatmap{
- height:360px;overflow:auto;background:#070d15;
- border-radius:9px;padding:5px
+ height:360px;
+ overflow:auto;
+ background:#070d15;
+ border-radius:9px;
+ padding:5px
 }
+
 .level{
- display:grid;grid-template-columns:1fr 72px 1fr;
- gap:4px;align-items:center;margin:2px 0
+ display:grid;
+ grid-template-columns:1fr 72px 1fr;
+ gap:4px;
+ align-items:center;
+ margin:2px 0
 }
-.price{text-align:center;color:#cbd7e5;font-size:10px}
-.lb,.la{height:20px;border-radius:3px}
-.lb{background:linear-gradient(90deg,#163e2c,#0f2a20)}
-.la{background:linear-gradient(90deg,#351722,#551d2b)}
+
+.price{
+ text-align:center;
+ color:#cbd7e5;
+ font-size:10px
+}
+
+.lb,.la{
+ height:20px;
+ border-radius:3px
+}
+
+.lb{
+ background:linear-gradient(90deg,#163e2c,#0f2a20)
+}
+
+.la{
+ background:linear-gradient(90deg,#351722,#551d2b)
+}
+
 table{
- width:100%;border-collapse:collapse;font-size:12px
+ width:100%;
+ border-collapse:collapse;
+ font-size:12px
 }
+
 td,th{
- padding:6px;border-bottom:1px solid #172535;text-align:right
+ padding:6px;
+ border-bottom:1px solid #172535;
+ text-align:right
 }
+
 .good{color:#52e495}
 .bad{color:#ff7183}
 .warn{color:#f1b84b}
 .muted{color:#7f91a5}
+
 .event{
- padding:6px 0;border-bottom:1px solid #172535;font-size:12px
+ padding:6px 0;
+ border-bottom:1px solid #172535;
+ font-size:12px
 }
+
 .diag{
  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
- font-size:11px;white-space:pre-wrap;word-break:break-word;
- background:#070d15;border-radius:8px;padding:9px;color:#b8c7d9
+ font-size:11px;
+ white-space:pre-wrap;
+ word-break:break-word;
+ background:#070d15;
+ border-radius:8px;
+ padding:9px;
+ color:#b8c7d9
 }
+
 footer{
- text-align:center;color:#62758b;font-size:10px;padding:15px
+ text-align:center;
+ color:#62758b;
+ font-size:10px;
+ padding:15px
 }
+
 @media(min-width:720px){
- .grid{grid-template-columns:repeat(4,1fr)}
- .wide{grid-column:span 2}
+ .grid{
+  grid-template-columns:repeat(4,1fr)
+ }
+
+ .wide{
+  grid-column:span 2
+ }
 }
 </style>
 </head>
@@ -104,18 +271,27 @@ footer{
 <body>
 
 <header>
+
  <div class="status">
+
   <span id="dot" class="dot"></span>
+
   <div>
+
    <h1>XT ETHUSDT Liquidity Map</h1>
+
    <div class="sub">
-    V1.5.5 • XT Futures / Research & Paper Trading
+    V1.5.6 • XT Futures / Research & Paper Trading
    </div>
+
   </div>
+
  </div>
+
  <div id="status" class="sub">
   Starting XT depth monitor…
  </div>
+
 </header>
 
 <main>
@@ -148,7 +324,9 @@ footer{
 
  <div class="signal">
 
-  <div class="k">LIQUIDITY & FLOW SIGNAL</div>
+  <div class="k">
+   LIQUIDITY & FLOW SIGNAL
+  </div>
 
   <div id="signal" class="signalMain signalNone">
    NO TRADE
@@ -190,6 +368,61 @@ footer{
 
 </section>
 
+<!-- EXPLOSIVE MOVE DETECTOR -->
+
+<section class="card">
+
+ <div class="explosive">
+
+  <div class="explosiveTitle">
+   RARE EVENT / EXPLOSIVE MOVE DETECTOR
+  </div>
+
+  <div id="explosiveSignal"
+       class="explosiveMain muted">
+   DORMANT
+  </div>
+
+  <div id="explosiveReason"
+       class="sub">
+   Monitoring for abnormal market acceleration…
+  </div>
+
+ </div>
+
+ <div class="grid"
+      style="margin-top:9px">
+
+  <div>
+   <div class="k">Shock Score</div>
+   <div id="shockScore" class="v">0/100</div>
+  </div>
+
+  <div>
+   <div class="k">Shock Direction</div>
+   <div id="shockDirection" class="v">NONE</div>
+  </div>
+
+  <div>
+   <div class="k">Acceleration</div>
+   <div id="acceleration" class="v">0.0000</div>
+  </div>
+
+  <div>
+   <div class="k">Liquidity Shock</div>
+   <div id="liquidityShock" class="v">0%</div>
+  </div>
+
+ </div>
+
+ <div class="sub"
+      style="margin-top:9px">
+  Experimental module only • Does not control the main signal engine.
+  Rare-event detection is observation-only in V1.5.6.
+ </div>
+
+</section>
+
 <section class="card">
 
  <div class="grid">
@@ -221,12 +454,23 @@ footer{
 <section class="card">
 
  <div class="row">
-  <button id="refreshBtn">↻ Reconnect / Refresh</button>
+
+  <button id="refreshBtn">
+   ↻ Reconnect / Refresh
+  </button>
 
   <select id="levels">
-   <option value="20">20 levels</option>
-   <option value="50" selected>50 levels</option>
+
+   <option value="20">
+    20 levels
+   </option>
+
+   <option value="50" selected>
+    50 levels
+   </option>
+
   </select>
+
  </div>
 
 </section>
@@ -266,7 +510,7 @@ footer{
  <h3>Connection Diagnostics</h3>
 
  <div id="diag" class="diag">
- Initializing…
+  Initializing…
  </div>
 
 </section>
@@ -276,7 +520,7 @@ footer{
  <h3>Liquidity Heatmap</h3>
 
  <div id="heatmap">
- Waiting for XT depth…
+  Waiting for XT depth…
  </div>
 
 </section>
@@ -286,7 +530,7 @@ footer{
  <h3>Order Book</h3>
 
  <div id="book">
- Waiting…
+  Waiting…
  </div>
 
 </section>
@@ -298,6 +542,7 @@ footer{
  <table>
 
   <thead>
+
    <tr>
     <th>Price</th>
     <th>Side</th>
@@ -305,6 +550,7 @@ footer{
     <th>Strength</th>
     <th>Distance</th>
    </tr>
+
   </thead>
 
   <tbody id="walls"></tbody>
@@ -317,7 +563,8 @@ footer{
 
  <h3>Alerts</h3>
 
- <div id="events" class="muted">
+ <div id="events"
+      class="muted">
   No alerts yet.
  </div>
 
@@ -351,7 +598,8 @@ footer{
 
  </div>
 
- <div class="row" style="margin-top:9px">
+ <div class="row"
+      style="margin-top:9px">
 
   <input
    id="qty"
@@ -361,9 +609,17 @@ footer{
    step="0.01"
   >
 
-  <button id="longBtn">Paper Long</button>
-  <button id="shortBtn">Paper Short</button>
-  <button id="closeBtn">Close</button>
+  <button id="longBtn">
+   Paper Long
+  </button>
+
+  <button id="shortBtn">
+   Paper Short
+  </button>
+
+  <button id="closeBtn">
+   Close
+  </button>
 
  </div>
 
@@ -373,7 +629,7 @@ footer{
 
  <div class="muted">
 
- V1.5.5: XT Connection Engine V4.5.1,
+ V1.5.6: XT Connection Engine V4.5.1,
  multi-cycle signal confirmation,
  LONG/SHORT scoring,
  liquidity pressure,
@@ -383,6 +639,10 @@ footer{
  signal stability,
  confidence engine,
  NO TRADE protection,
+ independent rare-event explosive move detector,
+ shock acceleration,
+ liquidity shock detection,
+ cooldown protection,
  diagnostics and paper trading only.
 
  </div>
@@ -392,23 +652,31 @@ footer{
 </main>
 
 <footer>
+
  Real trading is disabled.
  Market monitoring and paper trading only.
+
 </footer>
 
 <script>
 'use strict';
 
-/* =========================
+/* =========================================================
    CONNECTION
-========================= */
+========================================================= */
 
 const XT_ENGINE =
 'https://xt-connection-engine-v4-5-1.ramin-ravangard64.workers.dev';
 
 const SYMBOL='eth_usdt';
 
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
 const el={
+
  dot:document.getElementById('dot'),
  status:document.getElementById('status'),
  diag:document.getElementById('diag'),
@@ -426,13 +694,39 @@ const el={
  burst:document.getElementById('burst'),
  confidence:document.getElementById('confidence'),
 
+ explosiveSignal:
+  document.getElementById('explosiveSignal'),
+
+ explosiveReason:
+  document.getElementById('explosiveReason'),
+
+ shockScore:
+  document.getElementById('shockScore'),
+
+ shockDirection:
+  document.getElementById('shockDirection'),
+
+ acceleration:
+  document.getElementById('acceleration'),
+
+ liquidityShock:
+  document.getElementById('liquidityShock'),
+
  longScore:document.getElementById('longScore'),
  shortScore:document.getElementById('shortScore'),
- confirmations:document.getElementById('confirmations'),
- stability:document.getElementById('stability'),
 
- bidPressure:document.getElementById('bidPressure'),
- askPressure:document.getElementById('askPressure'),
+ confirmations:
+  document.getElementById('confirmations'),
+
+ stability:
+  document.getElementById('stability'),
+
+ bidPressure:
+  document.getElementById('bidPressure'),
+
+ askPressure:
+  document.getElementById('askPressure'),
+
  added:document.getElementById('added'),
  removed:document.getElementById('removed'),
 
@@ -448,63 +742,135 @@ const el={
 
  qty:document.getElementById('qty'),
  levels:document.getElementById('levels')
+
 };
 
-/* =========================
+
+/* =========================================================
    STATE
-========================= */
+========================================================= */
 
 let lastDepth=null;
+
 let historyData=[];
+
 let alertData=[];
+
 let busy=false;
 
 let signalHistory=[];
+
 let currentSignal='NO TRADE';
+
 let signalStreak=0;
 
+
+/*
+ Rare-event history.
+
+ This is deliberately separate from
+ the main signal engine.
+*/
+
+let shockHistory=[];
+
+let lastShockDirection='NONE';
+
+let shockCooldownUntil=0;
+
+
+/* =========================================================
+   PAPER STATE
+========================================================= */
+
 const paperState={
+
  balance:1000,
+
  position:null,
+
  trades:[]
+
 };
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
 
 const n=x=>Number(x)||0;
 
-/* =========================
+function clamp(x,min,max){
+
+ return Math.max(
+  min,
+  Math.min(max,x)
+ );
+
+}
+
+
+/* =========================================================
    STATUS
-========================= */
+========================================================= */
 
 function setStatus(t,live=false){
+
  el.status.textContent=t;
- el.dot.classList.toggle('live',live);
+
+ el.dot.classList.toggle(
+  'live',
+  live
+ );
+
 }
 
 function diag(t){
+
  el.diag.textContent=t;
+
 }
 
-/* =========================
-   PARSER
-========================= */
+
+/* =========================================================
+   NORMALIZE
+========================================================= */
 
 function norm(rows){
 
- if(!Array.isArray(rows))return[];
+ if(!Array.isArray(rows))
+  return[];
 
  return rows.map(x=>{
 
   if(Array.isArray(x)){
-   return [n(x[0]),n(x[1])];
+
+   return[
+    n(x[0]),
+    n(x[1])
+   ];
+
   }
 
-  return [
+  return[
    n(x?.price),
-   n(x?.quantity??x?.qty??x?.amount)
+   n(
+    x?.quantity ??
+    x?.qty ??
+    x?.amount
+   )
   ];
 
- }).filter(x=>x[0]>0&&x[1]>0);
+ }).filter(
+  x=>x[0]>0&&x[1]>0
+ );
+
 }
+
+
+/* =========================================================
+   PARSE DEPTH
+========================================================= */
 
 function parseDepth(payload){
 
@@ -513,10 +879,22 @@ function parseDepth(payload){
   payload?.data ??
   payload;
 
- const asks=norm(root?.a??root?.asks);
- const bids=norm(root?.b??root?.bids);
+ const asks=
+  norm(
+   root?.a ??
+   root?.asks
+  );
 
- if(!asks.length||!bids.length){
+ const bids=
+  norm(
+   root?.b ??
+   root?.bids
+  );
+
+ if(
+  !asks.length ||
+  !bids.length
+ ){
 
   const rc=
    payload?.returnCode ??
@@ -533,108 +911,206 @@ function parseDepth(payload){
   throw new Error(
    `No usable order book • bids=${bids.length} asks=${asks.length} returnCode=${rc} msg=${msg}`
   );
+
  }
 
  return{
+
   asks,
   bids,
-  ts:Number(root?.t)||Date.now()
+
+  ts:
+   Number(root?.t) ||
+   Date.now()
+
  };
+
 }
 
-/* =========================
-   ANALYSIS
-========================= */
+
+/* =========================================================
+   MAIN ANALYSIS
+========================================================= */
 
 function analyze(book){
 
- book.asks.sort((a,b)=>a[0]-b[0]);
- book.bids.sort((a,b)=>b[0]-a[0]);
+ book.asks.sort(
+  (a,b)=>a[0]-b[0]
+ );
 
- const bid=book.bids[0]?.[0];
- const ask=book.asks[0]?.[0];
+ book.bids.sort(
+  (a,b)=>b[0]-a[0]
+ );
+
+ const bid=
+  book.bids[0]?.[0];
+
+ const ask=
+  book.asks[0]?.[0];
 
  if(!bid||!ask)
-  throw new Error('empty depth');
+  throw new Error(
+   'empty depth'
+  );
 
- const mid=(bid+ask)/2;
- const spread=ask-bid;
+ const mid=
+  (bid+ask)/2;
+
+ const spread=
+  ask-bid;
+
+
+ /*
+  Top-10 quote pressure
+ */
 
  const bidPressure=
-  book.bids.slice(0,10)
-  .reduce((s,x)=>s+x[0]*x[1],0);
+  book.bids
+   .slice(0,10)
+   .reduce(
+    (s,x)=>s+x[0]*x[1],
+    0
+   );
 
  const askPressure=
-  book.asks.slice(0,10)
-  .reduce((s,x)=>s+x[0]*x[1],0);
+  book.asks
+   .slice(0,10)
+   .reduce(
+    (s,x)=>s+x[0]*x[1],
+    0
+   );
+
 
  const imbalance=
   (bidPressure-askPressure)/
   (bidPressure+askPressure||1);
 
+
+ /*
+  Median notional.
+ */
+
  const values=[
+
   ...book.bids,
   ...book.asks
+
  ]
- .map(x=>x[0]*x[1])
- .sort((a,b)=>a-b);
+ .map(
+  x=>x[0]*x[1]
+ )
+ .sort(
+  (a,b)=>a-b
+ );
 
  const med=
-  values[Math.floor(values.length/2)]||1;
+  values[
+   Math.floor(
+    values.length/2
+   )
+  ]||1;
+
+
+ /*
+  Walls
+ */
 
  const walls=[
 
   ...book.bids.map(x=>({
+
    price:x[0],
    qty:x[1],
    side:'bid'
+
   })),
 
   ...book.asks.map(x=>({
+
    price:x[0],
    qty:x[1],
    side:'ask'
+
   }))
 
  ]
- .filter(x=>x.price*x.qty>=med*4)
+ .filter(
+  x=>x.price*x.qty>=med*4
+ )
  .map(x=>({
 
   price:x.price,
   side:x.side,
-  notional:x.price*x.qty,
-  strength:x.price*x.qty/med,
-  distance:Math.abs(x.price-mid)/mid*100
+
+  notional:
+   x.price*x.qty,
+
+  strength:
+   x.price*x.qty/med,
+
+  distance:
+   Math.abs(x.price-mid)/
+   mid*100
 
  }))
- .sort((a,b)=>b.strength-a.strength)
+ .sort(
+  (a,b)=>b.strength-a.strength
+ )
  .slice(0,20);
 
+
+ /*
+  Liquidity changes
+ */
+
  let removed=0;
+
  let added=0;
 
  if(lastDepth){
 
-  for(const side of ['bids','asks']){
+  for(
+   const side of ['bids','asks']
+  ){
 
    const prev=
     new Map(
-     lastDepth[side].map(x=>[x[0],x[1]])
+     lastDepth[side]
+      .map(
+       x=>[x[0],x[1]]
+      )
     );
 
-   for(const [p,q] of book[side]){
+   for(
+    const [p,q]
+    of book[side]
+   ){
 
-    const old=prev.get(p)||0;
+    const old=
+     prev.get(p)||0;
 
-    if(old&&q<old*.5)
+    if(
+     old &&
+     q<old*.5
+    )
      removed++;
 
-    if(old&&q>old*1.5)
+    if(
+     old &&
+     q>old*1.5
+    )
      added++;
 
    }
+
   }
+
  }
+
+
+ /*
+  Normal price velocity.
+ */
 
  let velocity=0;
 
@@ -643,50 +1119,85 @@ function analyze(book){
   const previous=
    historyData.at(-1).mid;
 
-  if(previous)
+  if(previous){
+
    velocity=
-    ((mid-previous)/previous)*10000;
+    ((mid-previous)/
+     previous)*10000;
+
+  }
+
  }
+
+
+ /*
+  Main liquidity pressure.
+ */
 
  const pressure=
   imbalance*.55+
-  ((added-removed)*.02);
+  (added-removed)*.02;
+
+
+ /*
+  Existing flow burst.
+ */
 
  const burstRaw=
   Math.abs(pressure)*.8+
-  Math.min(1,Math.abs(velocity)/5)*.2;
+  Math.min(
+   1,
+   Math.abs(velocity)/5
+  )*.2;
 
  const burst=
-  Math.max(0,Math.min(1,burstRaw));
+  clamp(
+   burstRaw,
+   0,
+   1
+  );
+
 
  return{
+
   ...book,
+
   mid,
   spread,
+
   bidPressure,
   askPressure,
+
   imbalance,
+
   walls,
+
   added,
   removed,
+
   velocity,
   pressure,
   burst
+
  };
+
 }
 
-/* =========================
-   SIGNAL ENGINE
-========================= */
+
+/* =========================================================
+   MAIN SIGNAL ENGINE
+========================================================= */
 
 function calculateSignal(d){
 
  let long=0;
+
  let short=0;
 
- const reasons=[];
 
- /* imbalance */
+ /*
+  Imbalance
+ */
 
  if(d.imbalance>.20)
   long+=20;
@@ -694,7 +1205,10 @@ function calculateSignal(d){
  if(d.imbalance<-.20)
   short+=20;
 
- /* pressure */
+
+ /*
+  Pressure
+ */
 
  if(d.pressure>.12)
   long+=20;
@@ -702,7 +1216,10 @@ function calculateSignal(d){
  if(d.pressure<-.12)
   short+=20;
 
- /* velocity */
+
+ /*
+  Velocity
+ */
 
  if(d.velocity>.25)
   long+=15;
@@ -710,7 +1227,10 @@ function calculateSignal(d){
  if(d.velocity<-.25)
   short+=15;
 
- /* flow burst */
+
+ /*
+  Flow burst
+ */
 
  if(d.burst>.45){
 
@@ -722,9 +1242,15 @@ function calculateSignal(d){
 
  }
 
- /* liquidity changes */
 
- if(d.added>d.removed+2){
+ /*
+  Liquidity changes
+ */
+
+ if(
+  d.added>
+  d.removed+2
+ ){
 
   if(d.pressure>0)
    long+=10;
@@ -734,7 +1260,10 @@ function calculateSignal(d){
 
  }
 
- if(d.removed>d.added+2){
+ if(
+  d.removed>
+  d.added+2
+ ){
 
   if(d.pressure<0)
    short+=10;
@@ -744,73 +1273,129 @@ function calculateSignal(d){
 
  }
 
- /* wall proximity */
+
+ /*
+  Wall proximity
+ */
 
  const nearBid=
   d.walls.some(
-   w=>w.side==='bid'&&w.distance<.015
+   w=>
+    w.side==='bid' &&
+    w.distance<.015
   );
 
  const nearAsk=
   d.walls.some(
-   w=>w.side==='ask'&&w.distance<.015
+   w=>
+    w.side==='ask' &&
+    w.distance<.015
   );
 
- if(nearBid&&d.pressure>0)
+
+ if(
+  nearBid &&
+  d.pressure>0
+ )
   long+=10;
 
- if(nearAsk&&d.pressure<0)
+ if(
+  nearAsk &&
+  d.pressure<0
+ )
   short+=10;
 
- const total=
-  Math.max(long,short);
 
- let confidence=
-  Math.round(
-   Math.min(100,total)
+ const total=
+  Math.max(
+   long,
+   short
   );
 
- let rawSignal='NO TRADE';
+ const confidence=
+  Math.round(
+   clamp(
+    total,
+    0,
+    100
+   )
+  );
 
- if(long>=short+10&&long>=40)
-  rawSignal='WATCH LONG';
 
- else if(short>=long+10&&short>=40)
-  rawSignal='WATCH SHORT';
+ let rawSignal=
+  'NO TRADE';
 
- /* confirmation */
+
+ if(
+  long>=short+10 &&
+  long>=40
+ )
+  rawSignal=
+   'WATCH LONG';
+
+ else if(
+  short>=long+10 &&
+  short>=40
+ )
+  rawSignal=
+   'WATCH SHORT';
+
+
+ /*
+  Confirmation history
+ */
 
  signalHistory.push({
+
   signal:rawSignal,
+
   long,
   short,
+
   ts:Date.now()
+
  });
 
- if(signalHistory.length>8)
+
+ if(
+  signalHistory.length>8
+ )
   signalHistory.shift();
+
 
  const recent=
   signalHistory.slice(-3);
 
+
  let confirmedCount=0;
+
 
  if(
   recent.length===3 &&
-  recent.every(x=>x.signal===rawSignal) &&
+  recent.every(
+   x=>x.signal===rawSignal
+  ) &&
   rawSignal!=='NO TRADE'
  ){
+
   confirmedCount=3;
+
  }
 
- let finalSignal=rawSignal;
+
+ let finalSignal=
+  rawSignal;
+
 
  if(
   rawSignal==='WATCH LONG' &&
   confirmedCount===3 &&
   confidence>=60
  ){
-  finalSignal='CONFIRMED LONG';
+
+  finalSignal=
+   'CONFIRMED LONG';
+
  }
 
  else if(
@@ -818,56 +1403,601 @@ function calculateSignal(d){
   confirmedCount===3 &&
   confidence>=60
  ){
-  finalSignal='CONFIRMED SHORT';
+
+  finalSignal=
+   'CONFIRMED SHORT';
+
  }
 
  else if(
   confidence<45
  ){
-  finalSignal='NO TRADE';
+
+  finalSignal=
+   'NO TRADE';
+
  }
 
- if(finalSignal===currentSignal)
+
+ if(
+  finalSignal===currentSignal
+ ){
+
   signalStreak++;
- else{
-  currentSignal=finalSignal;
+
+ }else{
+
+  currentSignal=
+   finalSignal;
+
   signalStreak=1;
+
  }
+
 
  return{
+
   long,
   short,
+
   confidence,
+
   rawSignal,
   finalSignal,
+
   confirmedCount,
-  streak:signalStreak,
+
+  streak:
+   signalStreak,
+
   nearBid,
   nearAsk
+
  };
+
 }
 
-/* =========================
-   RENDER
-========================= */
+
+/* =========================================================
+   V1.5.6 EXPLOSIVE MOVE DETECTOR
+========================================================= */
+
+/*
+ IMPORTANT:
+
+ This module DOES NOT modify
+ calculateSignal().
+
+ It is independent.
+
+ It observes rare abnormal events
+ and generates alerts only.
+*/
+
+
+function detectExplosiveMove(d){
+
+ const now=
+  Date.now();
+
+
+ /*
+  Keep snapshot history.
+ */
+
+ shockHistory.push({
+
+  ts:now,
+
+  mid:d.mid,
+
+  velocity:d.velocity,
+
+  pressure:d.pressure,
+
+  imbalance:d.imbalance,
+
+  added:d.added,
+
+  removed:d.removed,
+
+  bidPressure:d.bidPressure,
+
+  askPressure:d.askPressure
+
+ });
+
+
+ /*
+  Keep enough data for comparison
+  but don't grow forever.
+ */
+
+ if(
+  shockHistory.length>60
+ )
+  shockHistory.shift();
+
+
+ /*
+  Need several independent observations.
+ */
+
+ if(
+  shockHistory.length<4
+ ){
+
+  return{
+
+   state:'DORMANT',
+
+   score:0,
+
+   direction:'NONE',
+
+   acceleration:0,
+
+   liquidityShock:0,
+
+   reason:
+    'Collecting baseline market behaviour…'
+
+  };
+
+ }
+
+
+ const current=
+  shockHistory.at(-1);
+
+
+ const previous=
+  shockHistory.at(-2);
+
+
+ const older=
+  shockHistory.at(-4);
+
+
+ /*
+  Price movement over recent cycles.
+ */
+
+ const recentReturn=
+  older.mid
+   ?((current.mid-older.mid)/
+     older.mid)*100
+   :0;
+
+
+ /*
+  Velocity change.
+ */
+
+ const acceleration=
+  current.velocity-
+  previous.velocity;
+
+
+ /*
+  Pressure direction.
+ */
+
+ const pressureDirection=
+  current.pressure;
+
+
+ /*
+  Liquidity removal ratio.
+
+  We care especially about
+  bids disappearing during a fall
+  and asks disappearing during a rise.
+ */
+
+ let directionalRemoval=0;
+
+
+ if(
+  recentReturn<0
+ ){
+
+  directionalRemoval=
+   current.removed+
+   (
+    current.askPressure<
+    current.bidPressure
+     ?0
+     :0
+   );
+
+ }
+
+ else if(
+  recentReturn>0
+ ){
+
+  directionalRemoval=
+   current.removed;
+
+ }
+
+
+ /*
+  Normalize liquidity shock.
+
+  This is intentionally conservative.
+ */
+
+ const liquidityShock=
+  clamp(
+   directionalRemoval/8,
+   0,
+   1
+  );
+
+
+ /*
+  Velocity component.
+
+  Very high acceleration gets
+  progressively more weight.
+ */
+
+ const velocityComponent=
+  clamp(
+   Math.abs(acceleration)/8,
+   0,
+   1
+  );
+
+
+ /*
+  Recent move component.
+
+  We are NOT waiting for 5%.
+
+  A large move is only one component.
+ */
+
+ const moveComponent=
+  clamp(
+   Math.abs(recentReturn)/1.5,
+   0,
+   1
+  );
+
+
+ /*
+  Imbalance component.
+ */
+
+ const imbalanceComponent=
+  clamp(
+   Math.abs(current.imbalance)/.65,
+   0,
+   1
+  );
+
+
+ /*
+  Pressure component.
+ */
+
+ const pressureComponent=
+  clamp(
+   Math.abs(current.pressure)/.40,
+   0,
+   1
+  );
+
+
+ /*
+  Direction agreement.
+
+  All major components must point
+  in the same direction.
+ */
+
+ let direction='NONE';
+
+ const bullish=
+  recentReturn>0 &&
+  acceleration>0 &&
+  current.pressure>0 &&
+  current.imbalance>0;
+
+ const bearish=
+  recentReturn<0 &&
+  acceleration<0 &&
+  current.pressure<0 &&
+  current.imbalance<0;
+
+
+ if(bullish)
+  direction='LONG';
+
+ else if(bearish)
+  direction='SHORT';
+
+
+ /*
+  Score.
+
+  This is intentionally hard to trigger.
+
+  Explosive events are rare.
+ */
+
+ let score=
+  velocityComponent*30+
+  moveComponent*20+
+  imbalanceComponent*15+
+  pressureComponent*15+
+  liquidityShock*20;
+
+
+ /*
+  Agreement bonus.
+ */
+
+ if(direction!=='NONE')
+  score+=10;
+
+
+ score=
+  Math.round(
+   clamp(
+    score,
+    0,
+    100
+   )
+  );
+
+
+ /*
+  Conservative event threshold.
+ */
+
+ let state='DORMANT';
+
+ if(
+  score>=75 &&
+  direction!=='NONE'
+ ){
+
+  state='EXPLOSIVE WATCH';
+
+ }
+
+ if(
+  score>=88 &&
+  direction!=='NONE'
+ ){
+
+  state='EXTREME SHOCK';
+
+ }
+
+
+ /*
+  Cooldown.
+
+  One market shock should not produce
+  ten separate shock alerts.
+ */
+
+ if(
+  now<shockCooldownUntil
+ ){
+
+  state='COOLDOWN';
+
+ }
+
+
+ /*
+  Reset cooldown only after the event
+  loses strength.
+ */
+
+ if(
+  now>=shockCooldownUntil &&
+  score<55
+ ){
+
+  lastShockDirection='NONE';
+
+ }
+
+
+ return{
+
+  state,
+
+  score,
+
+  direction,
+
+  acceleration,
+
+  liquidityShock,
+
+  recentReturn,
+
+  velocityComponent,
+
+  moveComponent,
+
+  imbalanceComponent,
+
+  pressureComponent
+
+ };
+
+}
+
+
+/* =========================================================
+   RENDER EXPLOSIVE MODULE
+========================================================= */
+
+function renderExplosive(x){
+
+ el.shockScore.textContent=
+  x.score+'/100';
+
+ el.shockDirection.textContent=
+  x.direction;
+
+ el.acceleration.textContent=
+  x.acceleration.toFixed(4);
+
+ el.liquidityShock.textContent=
+  Math.round(
+   x.liquidityShock*100
+  )+'%';
+
+
+ if(
+  x.state==='EXTREME SHOCK'
+ ){
+
+  el.explosiveSignal.textContent=
+   'EXTREME SHOCK';
+
+  el.explosiveSignal.className=
+   'explosiveMain '+
+   (
+    x.direction==='LONG'
+     ?'shockLong'
+     :'shockShort'
+   );
+
+  el.explosiveReason.textContent=
+   (
+    x.direction==='LONG'
+     ?'Abnormal upside acceleration detected.'
+     :'Abnormal downside acceleration detected.'
+   )+
+   ` Move ${x.recentReturn.toFixed(3)}% • Score ${x.score}/100`;
+
+  /*
+   IMPORTANT:
+   observation only.
+   No automatic paper entry.
+  */
+
+  if(
+   x.direction!==lastShockDirection
+  ){
+
+   alertPush(
+    'EXPLOSIVE MOVE',
+    x.direction+
+    ' shock detected • score '+
+    x.score+
+    '/100 • observation only'
+   );
+
+   lastShockDirection=
+    x.direction;
+
+   shockCooldownUntil=
+    Date.now()+120000;
+
+  }
+
+  return;
+
+ }
+
+
+ if(
+  x.state==='EXPLOSIVE WATCH'
+ ){
+
+  el.explosiveSignal.textContent=
+   'EXPLOSIVE WATCH';
+
+  el.explosiveSignal.className=
+   'explosiveMain shock';
+
+  el.explosiveReason.textContent=
+   `Early abnormal move detected • ${x.direction} • Score ${x.score}/100`;
+
+  return;
+
+ }
+
+
+ if(
+  x.state==='COOLDOWN'
+ ){
+
+  el.explosiveSignal.textContent=
+   'COOLDOWN';
+
+  el.explosiveSignal.className=
+   'explosiveMain muted';
+
+  el.explosiveReason.textContent=
+   'Previous rare event still being tracked.';
+
+  return;
+
+ }
+
+
+ el.explosiveSignal.textContent=
+  'DORMANT';
+
+ el.explosiveSignal.className=
+  'explosiveMain muted';
+
+ el.explosiveReason.textContent=
+  'No statistically unusual explosive move detected.';
+
+}
+
+
+/* =========================================================
+   MAX QUANTITY
+========================================================= */
 
 function maxQty(d){
 
  return Math.max(
+
   ...[
    ...d.bids,
    ...d.asks
-  ].map(x=>x[1]),
+  ].map(
+   x=>x[1]
+  ),
+
   .000001
+
  );
 
 }
 
+
+/* =========================================================
+   RENDER MAIN UI
+========================================================= */
+
 function render(d,s){
 
- el.mid.textContent=d.mid.toFixed(2);
- el.spread.textContent=d.spread.toFixed(3);
- el.imb.textContent=d.imbalance.toFixed(3);
+ el.mid.textContent=
+  d.mid.toFixed(2);
+
+ el.spread.textContent=
+  d.spread.toFixed(3);
+
+ el.imb.textContent=
+  d.imbalance.toFixed(3);
+
 
  el.regime.textContent=
   d.pressure>.12
@@ -875,6 +2005,7 @@ function render(d,s){
    :d.pressure<-.12
     ?'BEARISH'
     :'NEUTRAL';
+
 
  el.regime.className=
   'v '+
@@ -886,19 +2017,29 @@ function render(d,s){
      :''
   );
 
+
  el.pressure.textContent=
   d.pressure.toFixed(3);
 
  el.velocity.textContent=
   d.velocity.toFixed(4);
 
+
  el.burst.textContent=
   d.burst>=.45
-   ?'ACTIVE '+Math.round(d.burst*100)+'%'
-   :'LOW '+Math.round(d.burst*100)+'%';
+   ?'ACTIVE '+
+    Math.round(
+     d.burst*100
+    )+'%'
+   :'LOW '+
+    Math.round(
+     d.burst*100
+    )+'%';
+
 
  el.confidence.textContent=
   s.confidence+'%';
+
 
  el.longScore.textContent=
   s.long+'/100';
@@ -910,21 +2051,38 @@ function render(d,s){
   s.confirmedCount+'/3';
 
  el.stability.textContent=
-  s.streak+' cycle'+
-  (s.streak===1?'':'s');
+  s.streak+
+  ' cycle'+
+  (
+   s.streak===1
+    ?''
+    :'s'
+  );
+
 
  el.bidPressure.textContent=
-  Math.round(d.bidPressure).toLocaleString();
+  Math.round(
+   d.bidPressure
+  ).toLocaleString();
 
  el.askPressure.textContent=
-  Math.round(d.askPressure).toLocaleString();
+  Math.round(
+   d.askPressure
+  ).toLocaleString();
 
- el.added.textContent=d.added;
- el.removed.textContent=d.removed;
+ el.added.textContent=
+  d.added;
 
- /* signal */
+ el.removed.textContent=
+  d.removed;
 
- el.signal.textContent=s.finalSignal;
+
+ /*
+  Main signal
+ */
+
+ el.signal.textContent=
+  s.finalSignal;
 
  el.signal.className=
   'signalMain '+
@@ -938,68 +2096,126 @@ function render(d,s){
       :'signalWatch'
   );
 
+
  let reason='';
 
- if(s.finalSignal==='NO TRADE')
+
+ if(
+  s.finalSignal==='NO TRADE'
+ )
   reason=
    'NO TRADE protection active. Waiting for stronger confirmation.';
 
- else if(s.finalSignal==='WATCH LONG')
+ else if(
+  s.finalSignal==='WATCH LONG'
+ )
   reason=
    'Long bias detected, but confirmation is incomplete.';
 
- else if(s.finalSignal==='WATCH SHORT')
+ else if(
+  s.finalSignal==='WATCH SHORT'
+ )
   reason=
    'Short bias detected, but confirmation is incomplete.';
 
- else if(s.finalSignal==='CONFIRMED LONG')
+ else if(
+  s.finalSignal==='CONFIRMED LONG'
+ )
   reason=
    'Long signal confirmed across 3 consecutive cycles.';
 
- else if(s.finalSignal==='CONFIRMED SHORT')
+ else if(
+  s.finalSignal==='CONFIRMED SHORT'
+ )
   reason=
    'Short signal confirmed across 3 consecutive cycles.';
+
 
  el.signalReason.textContent=
   reason+
   ` Confidence ${s.confidence}%`;
 
- /* walls */
+
+ /*
+  Walls
+ */
 
  el.walls.innerHTML=
-  d.walls.map(w=>`
+
+  d.walls.map(
+   w=>`
 
    <tr>
-    <td>${w.price.toFixed(2)}</td>
-    <td>${w.side}</td>
-    <td>${Math.round(w.notional).toLocaleString()}</td>
-    <td>${w.strength.toFixed(1)}x</td>
-    <td>${w.distance.toFixed(3)}%</td>
+
+    <td>
+     ${w.price.toFixed(2)}
+    </td>
+
+    <td>
+     ${w.side}
+    </td>
+
+    <td>
+     ${Math.round(
+      w.notional
+     ).toLocaleString()}
+    </td>
+
+    <td>
+     ${w.strength.toFixed(1)}x
+    </td>
+
+    <td>
+     ${w.distance.toFixed(3)}%
+    </td>
+
    </tr>
 
-  `).join('') ||
+  `
+  ).join('') ||
 
-  '<tr><td colspan="5" class="muted">No large walls</td></tr>';
+  `
+   <tr>
+    <td colspan="5"
+        class="muted">
+     No large walls
+    </td>
+   </tr>
+  `;
 
- /* heatmap */
 
- const mq=maxQty(d);
+ /*
+  Heatmap
+ */
+
+ const mq=
+  maxQty(d);
 
  const a=
-  d.asks.slice(0,25).reverse();
+  d.asks
+   .slice(0,25)
+   .reverse();
 
  const b=
-  d.bids.slice(0,25);
+  d.bids
+   .slice(0,25);
+
 
  el.heatmap.innerHTML=
 
-  a.map(x=>`
+  a.map(
+   x=>`
 
    <div class="level">
 
     <div
      class="la"
-     style="width:${Math.min(100,x[1]/mq*100)}%"
+     style="
+      width:${Math.min(
+       100,
+       x[1]/mq*100
+      )}%
+     "
     ></div>
 
     <span class="price">
@@ -1010,19 +2226,27 @@ function render(d,s){
 
    </div>
 
-  `).join('')+
+  `
+  ).join('')+
 
   `
+
    <div class="level">
+
     <span></span>
+
     <span class="price">
      ${d.mid.toFixed(2)}
     </span>
+
     <span></span>
+
    </div>
+
   `+
 
-  b.map(x=>`
+  b.map(
+   x=>`
 
    <div class="level">
 
@@ -1034,80 +2258,143 @@ function render(d,s){
 
     <div
      class="lb"
-     style="width:${Math.min(100,x[1]/mq*100)}%"
+     style="
+      width:${Math.min(
+       100,
+       x[1]/mq*100
+      )}%
+     "
     ></div>
 
    </div>
 
-  `).join('');
+  `
+  ).join('');
 
- /* order book */
+
+ /*
+  Order book
+ */
 
  el.book.innerHTML=[
 
-  ...a.slice(-10).map(x=>`
-   <div class="side ask">
-    ${x[0].toFixed(2)} × ${x[1].toFixed(4)}
-   </div>
-  `),
+  ...a
+   .slice(-10)
+   .map(
+    x=>`
 
-  `<div class="side price">
-   MID ${d.mid.toFixed(2)}
-  </div>`,
+    <div class="side ask">
 
-  ...b.slice(0,10).map(x=>`
-   <div class="side bid">
-    ${x[0].toFixed(2)} × ${x[1].toFixed(4)}
+     ${x[0].toFixed(2)}
+     ×
+     ${x[1].toFixed(4)}
+
+    </div>
+
+   `
+   ),
+
+  `
+   <div class="side price">
+    MID ${d.mid.toFixed(2)}
    </div>
-  `)
+  `,
+
+  ...b
+   .slice(0,10)
+   .map(
+    x=>`
+
+    <div class="side bid">
+
+     ${x[0].toFixed(2)}
+     ×
+     ${x[1].toFixed(4)}
+
+    </div>
+
+   `
+   )
 
  ].join('');
+
 }
 
-/* =========================
+
+/* =========================================================
    ALERTS
-========================= */
+========================================================= */
 
 function alertPush(type,msg){
 
- const key=type+'|'+msg;
+ const key=
+  type+'|'+msg;
 
- if(alertData[0]?.key===key)
+
+ if(
+  alertData[0]?.key===key
+ )
   return;
 
+
  alertData.unshift({
+
   key,
   type,
   msg,
   ts:Date.now()
+
  });
 
+
  alertData=
-  alertData.slice(0,30);
+  alertData.slice(
+   0,
+   30
+  );
+
 
  el.events.innerHTML=
-  alertData.map(x=>`
+  alertData
+   .map(
+    x=>`
 
-   <div class="event">
-    ${new Date(x.ts).toLocaleTimeString()}
-    — <b>${x.type}</b> ${x.msg}
-   </div>
+    <div class="event">
 
-  `).join('');
+     ${new Date(
+      x.ts
+     ).toLocaleTimeString()}
+
+     — <b>${x.type}</b>
+     ${x.msg}
+
+    </div>
+
+   `
+   )
+   .join('');
+
 }
 
-/* =========================
-   FETCH
-========================= */
 
-async function fetchWithTimeout(url,ms){
+/* =========================================================
+   FETCH TIMEOUT
+========================================================= */
 
- const c=new AbortController();
+async function fetchWithTimeout(
+ url,
+ ms
+){
 
- const t=setTimeout(
-  ()=>c.abort(),
-  ms
- );
+ const c=
+  new AbortController();
+
+ const t=
+  setTimeout(
+   ()=>c.abort(),
+   ms
+  );
+
 
  try{
 
@@ -1131,20 +2418,32 @@ async function fetchWithTimeout(url,ms){
 
 }
 
+
+/* =========================================================
+   FETCH ENGINE
+========================================================= */
+
 async function fetchEngine(level){
 
- const stamp=Date.now();
+ const stamp=
+  Date.now();
 
  const url=
   `${XT_ENGINE}/api/depth`+
-  `?symbol=${encodeURIComponent(SYMBOL)}`+
+  `?symbol=${encodeURIComponent(
+   SYMBOL
+  )}`+
   `&level=${level}`+
   `&_=${stamp}`;
 
- const started=performance.now();
+
+ const started=
+  performance.now();
+
 
  diag(`
-V1.5.5 CONNECTION ENGINE
+
+V1.5.6 CONNECTION ENGINE
 
 Worker:
 ${XT_ENGINE}
@@ -1161,22 +2460,28 @@ ${level}
 Connecting…
 `);
 
+
  const res=
   await fetchWithTimeout(
    url,
    8000
   );
 
+
  const text=
   await res.text();
 
+
  const latency=
   Math.round(
-   performance.now()-started
+   performance.now()-
+   started
   );
 
+
  diag(`
-V1.5.5 CONNECTION ENGINE
+
+V1.5.6 CONNECTION ENGINE
 
 HTTP:
 ${res.status} ${res.statusText}
@@ -1191,12 +2496,15 @@ Response:
 ${text.slice(0,1800)}
 `);
 
+
  if(!res.ok)
   throw new Error(
    `ENGINE HTTP ${res.status}`
   );
 
+
  let payload;
+
 
  try{
 
@@ -1211,68 +2519,112 @@ ${text.slice(0,1800)}
 
  }
 
+
  return analyze(
-  parseDepth(payload)
+  parseDepth(
+   payload
+  )
  );
+
 }
 
-/* =========================
+
+/* =========================================================
    REFRESH
-========================= */
+========================================================= */
 
 async function refreshDepth(){
 
  if(busy)
   return;
 
+
  busy=true;
+
 
  const lv=
   Math.min(
    50,
    Math.max(
     1,
-    Number(el.levels.value)||50
+    Number(
+     el.levels.value
+    )||50
    )
   );
+
 
  setStatus(
   'Connecting to XT through V4.5.1…',
   false
  );
 
+
  try{
 
   const d=
-   await fetchEngine(lv);
+   await fetchEngine(
+    lv
+   );
+
 
   /*
-   Important:
-   analyze uses previous history
-   for velocity, so render before
-   pushing current cycle.
+   Main signal engine.
   */
 
   const s=
    calculateSignal(d);
 
+
+  /*
+   Independent explosive detector.
+  */
+
+  const shock=
+   detectExplosiveMove(d);
+
+
+  /*
+   Save current depth AFTER
+   calculations that need previous data.
+  */
+
   lastDepth={
+
    asks:d.asks,
+
    bids:d.bids
+
   };
+
 
   historyData.push(d);
 
-  if(historyData.length>300)
+
+  if(
+   historyData.length>300
+  )
    historyData.shift();
 
-  render(d,s);
+
+  render(
+   d,
+   s
+  );
+
+
+  renderExplosive(
+   shock
+  );
+
 
   setStatus(
    'XT LIVE • '+
-   new Date().toLocaleTimeString(),
+   new Date()
+    .toLocaleTimeString(),
    true
   );
+
 
   diag(
    el.diag.textContent+
@@ -1290,19 +2642,41 @@ Velocity: ${d.velocity.toFixed(4)}
 Burst: ${d.burst.toFixed(2)}
 Signal: ${s.finalSignal}
 Confidence: ${s.confidence}%
-Confirmation: ${s.confirmedCount}/3`
+
+EXPLOSIVE DETECTOR
+State: ${shock.state}
+Direction: ${shock.direction}
+Score: ${shock.score}/100
+Acceleration: ${shock.acceleration.toFixed(4)}
+Liquidity Shock: ${Math.round(
+ shock.liquidityShock*100
+)}%`
   );
 
-  /* alerts */
 
-  if(Math.abs(d.imbalance)>=.65)
+  /*
+   Existing alerts.
+  */
+
+  if(
+   Math.abs(
+    d.imbalance
+   )>=.65
+  ){
+
    alertPush(
     'Imbalance',
     'Top-10 imbalance '+
     d.imbalance.toFixed(2)
    );
 
-  if(d.walls.length)
+  }
+
+
+  if(
+   d.walls.length
+  ){
+
    alertPush(
     'Wall',
     'Large '+
@@ -1311,54 +2685,87 @@ Confirmation: ${s.confirmedCount}/3`
     d.walls[0].price.toFixed(2)
    );
 
-  if(d.removed>=3)
+  }
+
+
+  if(
+   d.removed>=3
+  ){
+
    alertPush(
     'Liquidity removal',
     d.removed+
     ' levels changed sharply'
    );
 
-  if(d.added>=3)
+  }
+
+
+  if(
+   d.added>=3
+  ){
+
    alertPush(
     'Liquidity added',
     d.added+
     ' levels increased sharply'
    );
 
+  }
+
+
   if(
-   s.finalSignal==='CONFIRMED LONG'||
-   s.finalSignal==='CONFIRMED SHORT'
+   s.finalSignal===
+    'CONFIRMED LONG' ||
+   s.finalSignal===
+    'CONFIRMED SHORT'
   ){
 
    alertPush(
     'CONFIRMED SIGNAL',
     s.finalSignal+
     ' • confidence '+
-    s.confidence+'%'
+    s.confidence+
+    '%'
    );
 
   }
 
+
  }catch(err){
 
-  el.dot.classList.remove('live');
+  el.dot.classList.remove(
+   'live'
+  );
+
 
   const msg=
    err?.message||
    String(err);
 
+
   const friendly=
    err?.name==='AbortError'
     ?'Connection timed out'
-    :(msg.includes('Failed to fetch')||
-      msg.includes('NetworkError')
+    :(
+      msg.includes(
+       'Failed to fetch'
+      )||
+      msg.includes(
+       'NetworkError'
+      )
        ?'Worker blocked by browser/network'
-       :'XT engine connection failed');
+       :'XT engine connection failed'
+     );
+
 
   setStatus(
-   friendly+' • '+msg,
+   friendly+
+   ' • '+
+   msg,
    false
   );
+
 
   diag(
    el.diag.textContent+
@@ -1370,6 +2777,7 @@ ${msg}
 Open the Engine /api/depth endpoint directly in Chrome if needed.`
   );
 
+
  }finally{
 
   renderPaper();
@@ -1380,9 +2788,10 @@ Open the Engine /api/depth endpoint directly in Chrome if needed.`
 
 }
 
-/* =========================
+
+/* =========================================================
    PAPER TRADING
-========================= */
+========================================================= */
 
 function paperTrade(side){
 
@@ -1391,52 +2800,76 @@ function paperTrade(side){
    'XT depth is not connected yet'
   );
 
+
  if(!historyData.length)
   return alert(
    'No live price'
   );
+
 
  if(paperState.position)
   return alert(
    'Position already open'
   );
 
+
  /*
-  Safety:
+  IMPORTANT:
+
+  Explosive Move Detector does NOT
+  automatically open a position.
+
   Paper trading remains manual.
-  Confirmed signals do NOT automatically
-  create a position in V1.5.5.
  */
 
  const price=
   historyData.at(-1).mid;
 
+
  const q=
-  n(el.qty.value);
+  n(
+   el.qty.value
+  );
+
 
  const margin=
   price*q;
+
 
  if(q<=0)
   return alert(
    'Invalid quantity'
   );
 
- if(margin>paperState.balance)
+
+ if(
+  margin>
+  paperState.balance
+ )
   return alert(
    'Insufficient paper balance'
   );
 
- paperState.balance-=margin;
+
+ paperState.balance-=
+  margin;
+
 
  paperState.position={
+
   side,
+
   qty:q,
+
   entry:price,
+
   margin
+
  };
 
+
  renderPaper();
+
 
  alertPush(
   'Paper trade',
@@ -1447,6 +2880,11 @@ function paperTrade(side){
 
 }
 
+
+/* =========================================================
+   CLOSE PAPER
+========================================================= */
+
 function closePaper(){
 
  if(
@@ -1455,35 +2893,49 @@ function closePaper(){
  )
   return;
 
+
  const p=
   paperState.position;
 
+
  const price=
   historyData.at(-1).mid;
+
 
  const dir=
   p.side==='long'
    ?1
    :-1;
 
+
  const pnl=
   (price-p.entry)*
   p.qty*
   dir
   -
-  (price*p.qty+
-   p.entry*p.qty)*.0005;
+  (
+   price*p.qty+
+   p.entry*p.qty
+  )*.0005;
+
 
  paperState.balance+=
   p.margin+pnl;
 
+
  paperState.trades.push({
+
   pnl
+
  });
 
- paperState.position=null;
+
+ paperState.position=
+  null;
+
 
  renderPaper();
+
 
  alertPush(
   'Paper trade',
@@ -1493,10 +2945,16 @@ function closePaper(){
 
 }
 
+
+/* =========================================================
+   PAPER UI
+========================================================= */
+
 function renderPaper(){
 
  el.balance.textContent=
   paperState.balance.toFixed(2);
+
 
  el.pnl.textContent=
   paperState.trades
@@ -1506,62 +2964,91 @@ function renderPaper(){
    )
    .toFixed(2);
 
+
  el.trades.textContent=
   paperState.trades.length;
 
+
  el.position.textContent=
   paperState.position
-   ?paperState.position.side.toUpperCase()+
-    ' @ '+
-    paperState.position.entry.toFixed(2)
+   ?paperState.position.side
+     .toUpperCase()+
+     ' @ '+
+     paperState.position.entry
+      .toFixed(2)
    :'None';
 
 }
 
-/* =========================
+
+/* =========================================================
    EVENTS
-========================= */
+========================================================= */
 
 document
- .getElementById('refreshBtn')
+ .getElementById(
+  'refreshBtn'
+ )
  .addEventListener(
   'click',
   refreshDepth
  );
 
+
 document
- .getElementById('longBtn')
+ .getElementById(
+  'longBtn'
+ )
  .addEventListener(
   'click',
   ()=>paperTrade('long')
  );
 
+
 document
- .getElementById('shortBtn')
+ .getElementById(
+  'shortBtn'
+ )
  .addEventListener(
   'click',
   ()=>paperTrade('short')
  );
 
+
 document
- .getElementById('closeBtn')
+ .getElementById(
+  'closeBtn'
+ )
  .addEventListener(
   'click',
   closePaper
  );
+
 
 el.levels.addEventListener(
  'change',
  refreshDepth
  );
 
-/* =========================
+
+/* =========================================================
    START
-========================= */
+========================================================= */
 
 renderPaper();
 
 refreshDepth();
+
+
+/*
+  Keep the stable 3-second
+  connection cycle from V1.5.5.
+
+  This is deliberate:
+  V1.5.6 must not sacrifice
+  connection stability just to
+  chase rare events.
+*/
 
 setInterval(
  refreshDepth,
@@ -1571,4 +3058,4 @@ setInterval(
 </script>
 
 </body>
-    </html>
+ </html>
